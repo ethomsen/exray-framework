@@ -1,0 +1,293 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Exray Theme 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-19 17:26+0700\n"
+"PO-Revision-Date: 2013-04-19 17:28+0700\n"
+"Last-Translator: Septian Ahmad Fujianto <septianahmad@naisinpo.com>\n"
+"Language-Team: \n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;_n\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-Language: English\n"
+"X-Poedit-Country: UNITED STATES\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: content.php:21
+#: single.php:23
+#: content-quote.php:19
+msgid "by"
+msgstr ""
+
+#: content.php:37
+#: page-archives.php:26
+#: page-full-width.php:27
+#: page.php:22
+#: single.php:39
+#: content-quote.php:35
+msgid "Edit"
+msgstr ""
+
+#: page-archives.php:37
+msgid "Archive by Month"
+msgstr ""
+
+#: page-archives.php:44
+msgid "Archive by Categories"
+msgstr ""
+
+#: sidebar-fourth-footer.php:6
+#: sidebar-third-footer.php:6
+#: sidebar-second-footer.php:6
+#: sidebar-first-footer.php:6
+msgid "No widget found, please add widget here from Dashboard"
+msgstr ""
+
+#: page-full-width.php:93
+#: page.php:55
+#: single.php:109
+msgid "No post were found!"
+msgstr ""
+
+#: search.php:15
+msgid "Search Result for: "
+msgstr ""
+
+#: search.php:27
+#: tag.php:27
+msgid "No post were Found"
+msgstr ""
+
+#: search.php:33
+#: tag.php:33
+msgid "&larr; Older Post"
+msgstr ""
+
+#: search.php:34
+#: tag.php:34
+msgid "Newer Post &rarr; "
+msgstr ""
+
+#: 404.php:21
+msgid "404 Error - Page not Found"
+msgstr ""
+
+#: 404.php:27
+msgid "Oops! It seems what you are looking are missing, Use Search box below to find other relevant content."
+msgstr ""
+
+#: tag.php:15
+msgid "More from: "
+msgstr ""
+
+#: sidebar-tertiary.php:5
+msgid "Search"
+msgstr ""
+
+#: header.php:51
+#: header.php:97
+msgid "Menu"
+msgstr ""
+
+#: functions.php:16
+msgid "Top menu"
+msgstr ""
+
+#: functions.php:17
+msgid "Main menu"
+msgstr ""
+
+#: functions.php:47
+msgid "Header Widget"
+msgstr ""
+
+#: functions.php:49
+msgid "The left Header area"
+msgstr ""
+
+#: functions.php:59
+msgid "Secondary"
+msgstr ""
+
+#: functions.php:61
+msgid "The left sidebar area"
+msgstr ""
+
+#: functions.php:70
+msgid "Tertiary"
+msgstr ""
+
+#: functions.php:72
+msgid "The right sidebar area"
+msgstr ""
+
+#: functions.php:80
+msgid "First Footer"
+msgstr ""
+
+#: functions.php:82
+msgid "The first footer from left"
+msgstr ""
+
+#: functions.php:91
+msgid "Second Footer"
+msgstr ""
+
+#: functions.php:93
+msgid "The second footer from left"
+msgstr ""
+
+#: functions.php:102
+msgid "Third Footer"
+msgstr ""
+
+#: functions.php:104
+msgid "The third footer from left"
+msgstr ""
+
+#: functions.php:113
+msgid "Fourth Footer"
+msgstr ""
+
+#: functions.php:115
+msgid "The fourth footer from left"
+msgstr ""
+
+#: functions.php:153
+msgid "Pingback:"
+msgstr ""
+
+#: functions.php:189
+msgid "Your comment is awaiting moderation"
+msgstr ""
+
+#: functions.php:225
+msgid "Name"
+msgstr ""
+
+#: functions.php:229
+msgid "Email"
+msgstr ""
+
+#: functions.php:233
+msgid "Website"
+msgstr ""
+
+#: comments.php:8
+msgid "You can not access this file directly"
+msgstr ""
+
+#: comments.php:17
+msgid "This post is Password protected, enter Password to view the Comments"
+msgstr ""
+
+#: comments.php:27
+msgid "No comments to this article"
+msgstr ""
+
+#: comments.php:28
+msgid "One comment to this article"
+msgstr ""
+
+#: comments.php:28
+#, php-format
+msgid "% comments to this article"
+msgstr ""
+
+#: comments.php:39
+msgid "&larr; Older Comments"
+msgstr ""
+
+#: comments.php:40
+msgid "Newer Comments &rarr;"
+msgstr ""
+
+#: comments.php:46
+msgid "Comments are closed"
+msgstr ""
+
+#: page-contact.php:112
+msgid "Success!"
+msgstr ""
+
+#: page-contact.php:113
+msgid "Email successfully sent"
+msgstr ""
+
+#: page-contact.php:117
+msgid "Error!"
+msgstr ""
+
+#: page-contact.php:118
+msgid "Unable sending email"
+msgstr ""
+
+#: page-contact.php:143
+msgid "Name *"
+msgstr ""
+
+#: page-contact.php:147
+msgid "Email *"
+msgstr ""
+
+#: page-contact.php:151
+msgid "Website*"
+msgstr ""
+
+#: page-contact.php:155
+msgid "Message"
+msgstr ""
+
+#: content-gallery.php:70
+#, php-format
+msgid "This gallery contains %s photo."
+msgstr ""
+
+#: footer.php:26
+msgid "Go to top"
+msgstr ""
+
+#: functions/exray-customizer.php:8
+msgid "Top Ad"
+msgstr ""
+
+#: functions/exray-customizer.php:9
+msgid "Allow you to upload ad Banner on the top of the page"
+msgstr ""
+
+#: functions/exray-customizer.php:21
+msgid "Display Top Ad?"
+msgstr ""
+
+#: functions/exray-customizer.php:36
+msgid "Upload Top Banner Image"
+msgstr ""
+
+#: functions/exray-customizer.php:51
+msgid "Link for Ad"
+msgstr ""
+
+#: functions/widget-ad-260.php:13
+msgid " Display a single 260 x 120 ad block"
+msgstr ""
+
+#: functions/widget-ad-260.php:20
+msgid "Ad 260x128"
+msgstr ""
+
+#: functions/widget-ad-260.php:30
+msgid "Title"
+msgstr ""
+
+#: functions/widget-ad-260.php:36
+msgid "Ad Image"
+msgstr ""
+
+#: functions/widget-ad-260.php:42
+msgid "Ad Link"
+msgstr ""
+
