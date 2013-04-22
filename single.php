@@ -5,7 +5,7 @@
 			
 			<div class="row">
 			
-				<div class="span6 article-container-adaptive" id="primary">
+				<div class="span6 article-container-adaptive" id="main">
 					
 					<div class="content" role="main">
 							
@@ -121,18 +121,18 @@
 					</div> 
 					<!-- end content -->
 				</div> 
-				<!-- end span6 primary -->
+				<!-- end span6 main -->
 
-				<div id="secondary" class="widget-area span3 main-sidebar" role="complementary">
+				<div id="primary" class="widget-area span3 main-sidebar" role="complementary">
 
 					<?php get_sidebar('sidebar'); ?>
 
 				</div>  
-				<!-- end span3 secondary left-sidebar -->	
+				<!-- end span3 primary left-sidebar -->	
 
-				<div id="tertiary" class="widget-area span3 main-sidebar" role="complementary">						
+				<div id="secondary" class="widget-area span3 main-sidebar" role="complementary">						
 
-					<?php get_sidebar('tertiary'); ?>
+					<?php get_sidebar('secondary'); ?>
 							
 				</div> 
 				<!-- end span3 tertiary right-sidebar -->
