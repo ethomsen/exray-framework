@@ -15,7 +15,7 @@ function exray_theme_menu(){
 		'Exray Theme', 
 		'Exray Theme', 
 		'administrator', 
-		'exray_theme_menu',
+		'exray_theme_menu', 
 		'exray_theme_page'
 	);
 
@@ -24,7 +24,7 @@ function exray_theme_menu(){
 		'Display Options', 
 		'Display Options', 
 		'administrator',
-		'exray_theme_display_options',
+		'exray_theme_menu',	 // Submenu ID = Main Menu ID to customize default submenu with diffrent title.
 		'exray_theme_page'
 	);
 
