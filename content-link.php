@@ -13,8 +13,8 @@
 
 			<p class="article-meta-extra">
 				<span class="icon left-meta-icon">P</span>
-				<a href="#" title="4:33 am" rel="bookmark">
-					<time datetime="<?php the_time(get_option('date_format')); ?>" pubdate><?php the_time(get_option('date_format')); ?></time>
+				<a href="<?php the_permalink(); ?>" title="<?php echo get_the_time(); ?>" rel="bookmark">
+					<time datetime="<?php echo get_the_date('c'); ?>" pubdate><?php echo get_the_date() ?></time>
 				</a> , <?php _e("by", "exray-framework") ?>
 				<?php the_author_posts_link(); ?>	
 
