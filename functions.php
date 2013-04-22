@@ -42,22 +42,11 @@ if (!isset($content_width)) $content_width = 542;
 /***************************************************************/
 
 if(function_exists('register_sidebar')){
+
 	register_sidebar(
 		array(
-			'name' => __( 'Header Widget', 'exray-framework' ),
-			'id' => 'header-widget',
-			'description' => __('The left Header area', 'exray-framework'),
-			'before_widget' => '<aside id="header-widget" class="right-header-widget fr top-widget" role="complementary">',
-			'after_widget' => '</aside>',
-			'before_title' => '<h4>',
-			'after_title' => '</h4>',
-		)
-	);
-	
-	register_sidebar(
-		array(
-			'name' => __( 'Secondary', 'exray-framework' ),
-			'id' => 'secondary',
+			'name' => __( 'Primary', 'exray-framework' ),
+			'id' => 'primary',
 			'description' => __('The left sidebar area', 'exray-framework'),
 			'before_widget' => '<aside class="sidebar-widget clearfix">',
 			'after_widget' => '</aside> <!--end sidebar-widget-->',
@@ -67,8 +56,8 @@ if(function_exists('register_sidebar')){
 	);
 
 	register_sidebar(array(
-			'name' => __( 'Tertiary', 'exray-framework' ),
-			'id' => 'tertiary',
+			'name' => __( 'Secondary', 'exray-framework' ),
+			'id' => 'secondary',
 			'description' => __('The right sidebar area', 'exray-framework'),
 			'before_widget' => '<aside class="sidebar-widget">',
 			'after_widget' => '</aside> <!--end sidebar-widget-->',
@@ -137,6 +126,20 @@ if ( function_exists( 'add_image_size' ) ) {
 	add_image_size( 'category-thumb', 300, 9999 ); //300 pixels wide (and unlimited height)
 	add_image_size( 'homepage-thumb', 220, 180, true ); //(cropped)
 }
+
+/***************************************************************/
+/* Add infinity symbol on Post Format Aside */
+/***************************************************************/
+add_filter( 'the_content', 'exray_theme_aside_infinity', 9 ); // run before wpautop
+
+function exray_theme_aside_infinity( $content ) {
+
+	if ( has_post_format( 'aside' ) && !is_singular() )
+		$content .= ' <a href="' . get_permalink() . '">&#8734;</a>';
+
+	return $content;
+}
+
 
 /***************************************************************/
 /* Localization*/
@@ -264,19 +267,7 @@ require_once ('functions/widget-ad-260.php');
 /***************************************************************/
 require_once ('functions/exray-customizer.php');
 
-/***************************************************************/
-/* Theme Color Customizer*/
-/***************************************************************/
-function exray_theme_customize_css(){
-	$options = get_option( 'exray_custom_settings' );
-	?>
-		 <style type="text/css">
-             a { color:<?php echo $options['link_color']; ?>; }
-         </style>
-	<?php
-}
 
-add_action('wp_head', 'exray_theme_customize_css');
 /***************************************************************/
 /* Register/ Create Theme Option Page*/
 /***************************************************************/
@@ -331,7 +322,7 @@ function exray_theme_menu(){
 
 add_action('admin_menu', 'exray_theme_menu');
 
-/* Admin Page View*/
+/* Render Admin Page */
 
 function exray_theme_page($active_tab = ''){
 ?>
@@ -403,13 +394,25 @@ function exray_theme_page($active_tab = ''){
 <?php	
 }
 
-/* Theme option Initialized*/
+/* Provides default values for the Display Options. #neo */
 
+function exray_theme_default_display_options() {
+	
+	$defaults = array(
+		'show_slider'		=>	'',
+	);
+	
+	return apply_filters( 'exray_theme_default_display_options', $defaults );
+	
+}
+
+/* Theme option Initialized*/
 function exray_theme_options_init(){
 
 	// Create theme options if not exist
-	if(false == get_option('exray_theme_display_options') ){
-		add_option('exray_theme_display_options'); 
+	if(false == get_option('exray_theme_display_options', '') ){
+		// #neo
+		add_option( 'exray_theme_display_options', apply_filters( 'exray_theme_default_display_options', exray_theme_default_display_options() ) );
 	}
 
 	add_settings_section( 
@@ -448,9 +451,9 @@ function exray_general_options_callback(){
 
 function exray_toggle_slider_callback($args){
 	// call to add_settings_field
-	$options = get_option('exray_theme_display_options');
-
-	$html = '<input type="checkbox" id="show_slider" name="exray_theme_display_options[show_slider]" value="1" ' . checked(1,  $options['show_slider'], false) . '/>';
+	$options = get_option('exray_theme_display_options', 'default_value');
+	// #neo Check if Default Value exist
+	$html = '<input type="checkbox" id="show_slider" name="exray_theme_display_options[show_slider]" value="1" ' . checked(1,  isset( $options['show_slider'] ) ? $options['show_header'] : 0, false ) . '/>';
 	
 	// Here, we will take the first argument of the array and add it to a label next to the checkbox
 	$html .= '<label for="show_slider">'  . $args[0] . '</label>';
@@ -458,6 +461,8 @@ function exray_toggle_slider_callback($args){
 	echo $html;
 }
 
+
+// Initialize social options
 function exray_social_init(){
 
 	add_settings_section( 
@@ -491,7 +496,7 @@ add_action( 'admin_init', 'exray_social_init');
 function exray_theme_social_section_callback(){
 	?>	
 		<p class="description">Provide the URL to the social network you'd want to display</p>			
-	<?php
+ <?php
 }
 
 function exray_theme_twitter_callback(){
@@ -571,8 +576,10 @@ function exray_input_init(){
 		'exray_theme_input_section'
 	);
 
-	add_option('exray_theme_input_options');
-
+	if(false == get_option('exray_theme_input_options')){
+		add_option('exray_theme_input_options');
+	}
+	
 	register_setting( 
 		'exray_theme_input_options_group', 
 		'exray_theme_input_options', 
