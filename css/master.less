@@ -175,7 +175,7 @@ blockquote{
 /* Top Nav */
 .top-menu-container{
 	background: @menu-color;
-	margin-bottom: 1.5em;
+	margin-bottom: 0;
 	
 	 .top-menu-navigation {
 	 	float: right;
@@ -272,16 +272,37 @@ blockquote{
   	}
 }
 
-.logo{
-	margin-bottom: 0;	
-}
 
-.logo-container{
-	padding-bottom: 1.5em;
+#header-wrap{
+	padding: 3em 0 3em 0;
+
+	.logo-container{
+		padding-left: 1.5em;
+
+	.site-title{
+		display: inline-block;
+		font-size: 2em;
+		line-height: 1.5em;
+		margin-top: 0;
+	}
 	
+	.site-description{
+		display: block;
+		font-size: 1em;
+		font-weight: normal;
+		font-family: @widget-heading-font;
+		line-height: 1.5em;
+		margin-bottom: 0;
+	}
+
+	.logo{
+		margin-bottom: 0;	
+	}
+
 	h1{
 		line-height: 0;
 		margin-bottom: 0;
+		margin-top: 0;
 
 		a{
 			color: @dark-color;
@@ -289,19 +310,23 @@ blockquote{
 	}
 }	
 
-.right-header-widget{
-	padding-bottom: 1.5em;
-	
-	img{
-		display:block;
-		max-width: 100%;
+	.right-header-widget{
+		padding-bottom: 0;
+		padding-top: 0;
+		
+		img{
+			display:block;
+			max-width: 100%;
+		}
+	}
+
+	.top-widget{
+		margin-top: 0;
+		
 	}
 }
 
-.top-widget{
-	margin-top: 11px;
-	
-}
+
 
 /*	Clearfix Navigation WordPress	*/
 
@@ -1052,7 +1077,7 @@ form{
 
 /*	Content in the middle for large screen	*/
 @media screen and (min-width: 60em) {
-	#primary{
+	#main{
 		width: 47.5%;
 		margin-left: 26.3%;
 		float: left;
@@ -1060,14 +1085,14 @@ form{
 	
 	}
 	
-	#secondary{
+	#primary{
 		float: left;
 		width: 22.5%;
 		margin-left: -71.3%;
 		
 	}
 	
-	#tertiary{
+	#secondary{
 		margin-right: 0;
 		float: right;
 		width: 22.5%;
@@ -1105,20 +1130,20 @@ form{
 		margin-bottom:  1em 0;
 	}
 
-	#primary{
+	#main{
 		width: 100%;
 		padding-left: 5em;
 		margin-left: 0;
 	}
 	
-	#secondary{
+	#primary{
 		float: left;
 		width: 100%;
 		margin-left: 0;
 		
 	}
 	
-	#tertiary{
+	#secondary{
 		margin-right: 0;
 		float: left;
 		width: 100%;
@@ -1146,20 +1171,20 @@ form{
 		width: 100%;
 	}
 
-	#primary{
+	#main{
 		width: 100%;
 		padding-left: 0;
 		margin-left: 0;
 	}
 	
-	#secondary{
+	#primary{
 		float: left;
 		width: 100%;
 		margin-left: 0;
 		
 	}
 	
-	#tertiary{
+	#secondary{
 		margin-right: 0;
 		float: left;
 		width: 100%;
