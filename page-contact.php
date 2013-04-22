@@ -49,7 +49,7 @@
         //Check if errors occures
         if(!$error_name && !$error_email && !$error_message){
             //Get the received email
-            $receiver_email = "septianahmad@naisinpo.com";
+            $receiver_email = get_option('admin_email');
             
             $subject = 'You have been contacted by'. $name;
             $body = "You have been contacted by $name. Their message is:". PHP_EOL. PHP_EOL;
@@ -86,7 +86,7 @@
 				<div class="span6 article-container-adaptive" id="main">
 					
 					<div class="content" role="main">
-							
+		
 							<?php if(have_posts()) : while(have_posts()) : the_post(); ?>				
 							<article class="post clearfix" id="post-1" role="article">
 								
