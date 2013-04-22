@@ -33,17 +33,6 @@
 							<p class="article-nav-prev"><?php next_posts_link(__('&larr; Older Post', 'exray-framework')); ?></p>
 	    					<p class="article-nav-next"><?php previous_posts_link(__('Newer Post &rarr; ', 'exray-framework')); ?></p>
 
-							<!-- <ul>
-		    					<li><a class="selected" href="#">1</a></li>
-		    					<li><a href="#">2</a></li>
-		    					<li><a href="#">3</a></li>
-		    					<li><a href="#">4</a></li>
-		    					<li><a href="#">5</a></li>
-		    					<li><a href="#">6</a></li>
-	    						<li><a href="#">Next Page >></a></li> 
-	
-	    					</ul> -->
-							
 						</nav>	
 						<!-- End nav-below -->	
 					</div> 

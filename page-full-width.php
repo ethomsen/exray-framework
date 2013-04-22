@@ -14,75 +14,75 @@
 					
 					<div class="content" role="main">
 							
-							<?php if(have_posts()) : while(have_posts()) : the_post(); ?>				
-							<article class="post clearfix" id="post-1" role="article">
+						<?php if(have_posts()) : while(have_posts()) : the_post(); ?>				
+						<article class="post clearfix" id="post-1" role="article">
+							
+							<header>
 								
-								<header>
-									
-										<h1 class="entry-title"><?php the_title(); ?></h1>
-										<div class="entry-meta">								
-											<p class="article-meta-extra">										
-								                 <?php
-                                                   if(current_user_can('edit_post', $post->ID)){
-								                 		edit_post_link(__('Edit', 'exray-framework'), '<p><span class="icon left-meta-icon">S</span>&nbsp;', '</p>', '');
-								                 	}
-   
-								                 ?>
-												
-											</p>
-										</div> 
-										<!-- End entry-meta -->
-								</header>
+									<h1 class="entry-title"><?php the_title(); ?></h1>
+									<div class="entry-meta">								
+										<p class="article-meta-extra">										
+							                 <?php
+                                               if(current_user_can('edit_post', $post->ID)){
+							                 		edit_post_link(__('Edit', 'exray-framework'), '<p><span class="icon left-meta-icon">S</span>&nbsp;', '</p>', '');
+							                 	}
 
-								<div class="entry-content">	
-									<!-- Experimental -->
-									<?php if(has_post_thumbnail()) : ?>
+							                 ?>
+											
+										</p>
+									</div> 
+									<!-- End entry-meta -->
+							</header>
 
-										<aside class="post_image">
-											<figure class="article-preview-image">
+							<div class="entry-content">	
+								<!-- Experimental -->
+								<?php if(has_post_thumbnail()) : ?>
 
-												<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+									<aside class="post_image">
+										<figure class="article-preview-image">
 
-											</figure>		
-										</aside>
+											<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
 
-									<?php else: ?>
-										<!-- <hr class="content-separator"> -->
-									<?php endif ?> 
-									<!-- End post_image Experimental -->
-
-									<?php the_content(); ?>
-								</div>
-															  
-								<?php if(has_tag()) : ?>
-
-									<footer class="entry-meta cb" id="tag-container" role="contentinfo">
-
-					                    <ul class="tags">
-					                        <li><span class="icon tags">,</span></li>
-					                        <?php the_tags() ?> 
-
-				                        </ul>
-
-									</footer> 
+										</figure>		
+									</aside>
 
 								<?php else: ?>
+									<!-- <hr class="content-separator"> -->
+								<?php endif ?> 
+								<!-- End post_image Experimental -->
 
-									<hr class="content-separator">	
+								<?php the_content(); ?>
+							</div>
+															  
+							<?php if(has_tag()) : ?>
 
-								<?php endif; ?>
-								<!-- end meta (category & tag) -->	
-								
-								<div class="post-pagination">
-									<!-- Pagination For Multipaged Post -->
-									<?php $args = array(
-										'before'=>'<p class="post-pagination">Page',
-										'after'=>'</p>',
-										'pagelink'=>'%'  
-									);?>
+								<footer class="entry-meta cb" id="tag-container" role="contentinfo">
 
-									<?php wp_link_pages($args); ?>
-								</div>
+				                    <ul class="tags">
+				                        <li><span class="icon tags">,</span></li>
+				                        <?php the_tags() ?> 
+
+			                        </ul>
+
+								</footer> 
+
+							<?php else: ?>
+
+								<hr class="content-separator">	
+
+							<?php endif; ?>
+							<!-- end meta (category & tag) -->	
+							
+							<div class="post-pagination">
+								<!-- Pagination For Multipaged Post -->
+								<?php $args = array(
+									'before'=>'<p class="post-pagination">Page',
+									'after'=>'</p>',
+									'pagelink'=>'%'  
+								);?>
+
+								<?php wp_link_pages($args); ?>
+							</div>
 											
 							</article> 	
 							<!-- End article -->

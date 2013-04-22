@@ -10,64 +10,64 @@
 			
 			<div class="row">
 			
-				<div class="span6 article-container-adaptive" id="primary">
+				<div class="span6 article-container-adaptive" id="main">
 					
 					<div class="content" role="main">
 										
-							<article class="post clearfix" id="post-1" role="article">
+						<article class="post clearfix" id="post-1" role="article">
+							
+							<header>
 								
-								<header>
-									
-										<h1 class="entry-title"><?php the_title(); ?></h1>
-										<div class="entry-meta">								
-											<p class="article-meta-extra">										
-								                 <?php
-                                                   if(current_user_can('edit_post', $post->ID)){
-								                 		edit_post_link(__('Edit', 'exray-framework'), '<p><span class="icon left-meta-icon">S</span>&nbsp;', '</p>', '');
-								                 	}
-   
-								                 ?>
-												
-											</p>
-										</div> 
-										<!-- End entry-meta -->
-								</header>
+								<h1 class="entry-title"><?php the_title(); ?></h1>
+								<div class="entry-meta">								
+									<p class="article-meta-extra">										
+						                 <?php
+                                           if(current_user_can('edit_post', $post->ID)){
+						                 		edit_post_link(__('Edit', 'exray-framework'), '<p><span class="icon left-meta-icon">S</span>&nbsp;', '</p>', '');
+						                 	}
 
-								<div class="entry-content">	
-									<h4><?php _e('Archive by Month', 'exray-framework'); ?></h4>
-                                    <ul>
-                                        <?php wp_get_archives('type=monthly'); ?>
-                                    </ul>
+						                 ?>
+										
+									</p>
+								</div> 
+								<!-- End entry-meta -->
+							</header>
 
-                                    <br/>
+							<div class="entry-content">	
+								<h4><?php _e('Archive by Month', 'exray-framework'); ?></h4>
+                                <ul>
+                                    <?php wp_get_archives('type=monthly'); ?>
+                                </ul>
 
-									<h4><?php _e('Archive by Categories', 'exray-framework'); ?></h4>
-                                    <ul>
-                                        <?php wp_list_categories('title_li='); ?>
-                                    </ul>
+                                <br/>
 
-								</div>
-															  
-								<?php if(has_tag()) : ?>
+								<h4><?php _e('Archive by Categories', 'exray-framework'); ?></h4>
+                                <ul>
+                                    <?php wp_list_categories('title_li='); ?>
+                                </ul>
 
-									<footer class="entry-meta cb" id="tag-container" role="contentinfo">
+							</div>
+														  
+							<?php if(has_tag()) : ?>
 
-					                    <ul class="tags">
-					                        <li><span class="icon tags">,</span></li>
-					                        <?php the_tags() ?> 
+								<footer class="entry-meta cb" id="tag-container" role="contentinfo">
 
-				                        </ul>
+				                    <ul class="tags">
+				                        <li><span class="icon tags">,</span></li>
+				                        <?php the_tags() ?> 
 
-									</footer> 
+			                        </ul>
 
-								<?php else: ?>
+								</footer> 
 
-									<hr class="content-separator">	
+							<?php else: ?>
 
-								<?php endif; ?>
-								<!-- end meta (category & tag) -->	
-			
-							</article> 	
+								<hr class="content-separator">	
+
+							<?php endif; ?>
+							<!-- end meta (category & tag) -->	
+		
+						</article> 	
 							<!-- End article -->
 							
 					</div> 
@@ -75,19 +75,19 @@
 				</div> 
 				<!-- end span6 primary -->
 
-				<div id="secondary" class="widget-area span3 main-sidebar" role="complementary">
+				<div id="primary" class="widget-area span3 main-sidebar" role="complementary">
 
 					<?php get_sidebar('sidebar'); ?>
 
 				</div>  
-				<!-- end span3 secondary left-sidebar -->	
+				<!-- end span3 primary left-sidebar -->	
 
-				<div id="tertiary" class="widget-area span3 main-sidebar" role="complementary">						
+				<div id="secondary" class="widget-area span3 main-sidebar" role="complementary">						
 
-					<?php get_sidebar('tertiary'); ?>
+					<?php get_sidebar('secondary'); ?>
 							
 				</div> 
-				<!-- end span3 tertiary right-sidebar -->
+				<!-- end span3 secondary right-sidebar -->
 
 			</div>
 			<!-- ENd Row -->

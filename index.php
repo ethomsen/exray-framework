@@ -40,22 +40,6 @@
 					
 					<?php endif; ?>
 
-					<?php 
-
-						$options = get_option('exray_manage_history_options');			
-
-						if($options['show_history']){
-							echo '<input type="text" value="'.$options['facebook'].'"/>';
-						}
-
-						$social_options = get_option('exray_theme_social_options');
-
-						if(isset($options['checkbox_element']) && $social_options['exray_theme_twitter'] ){
-							echo '<a href="'.$social_options['exray_theme_twitter'].'">@fujianto</a>';
-						}
-						echo '<a href="'.$social_options['exray_theme_twitter'].'">@fujianto</a>';
-
-					?>	
 
 					<?php 
 						$options = get_option( 'exray_theme_input_options' );
@@ -73,7 +57,6 @@
 						}else if(isset($options['radio_element']) && $options['radio_element'] == '2'){
 							echo '<h3>FEMALE</h3>';
 						}
-
 						if(isset($options['select_element']) &&  $options['select_element'] == 'never'){
 							echo '<h2>never</h2>';
 						} else if(isset($options['select_element']) &&  $options['select_element'] == 'sometimes'){
@@ -122,7 +105,7 @@
 					<?php get_sidebar('secondary'); ?>
 							
 				</div> 
-				<!-- end span3 tertiary right-sidebar -->
+				<!-- end span3 secondary right-sidebar -->
 			</div> 
 			<!--End row -->
 			
