@@ -26,12 +26,14 @@
 	<?php wp_head() ?>
 </head>
 <body <?php body_class() ?> >
+
 	<?php $options = get_option( 'exray_custom_settings' );?>
 	<!--[if lte IE 8 ]>
 	<noscript>
 		<strong>JavaScript is required for this website to be displayed correctly. Please enable JavaScript before continuing...</strong>
 	</noscript>
 	<![endif]-->
+	
 	<div id="page" class="wrap">
 		
 		<div class="header-container">
@@ -55,12 +57,28 @@
 				<!-- End container -->
 			</div> 
 			<!-- End top-menu-container -->
-			<div class="container">
+			<div class="container" id="header-wrap">
 
 				<div class="row">
 					<div class="span3 logo-container"> 
-						<h1 class="logo"><a href="<?php echo home_url(); ?>"><img src="<?php echo $options['exray_theme_logo']; ?>" 
-							alt="<?php bloginfo('name')?> | <?php bloginfo('description')?>" /></a></h1>
+	
+						<?php if($options['display_logo'] != 0) : ?>
+						<!-- Display logo Image -->
+						<h1 class="logo"> 
+							<a href="<?php echo home_url(); ?>">
+								<img src="<?php echo $options['exray_theme_logo']; ?>" alt="<?php bloginfo('name')?> | <?php bloginfo('description')?>" />
+							</a>
+						</h1>
+
+						<?php else: ?>		
+						<!-- Display text logo and tagline	 -->
+						<hgroup>
+							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+							<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
+						</hgroup>
+									
+						<?php endif; ?>					
+						
 					</div>	
 					<!-- End span3 --> 	
 					<div class="span9 clearfix">
