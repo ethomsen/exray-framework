@@ -1,5 +1,5 @@
 <?php 
-	if(!function_exists('dynamic_sidebar') || !dynamic_sidebar('secondary') ) : ?>
+	if(!function_exists('dynamic_sidebar') || !dynamic_sidebar('primary') ) : ?>
 
 	<div class="sidebar-widget">
 		<h4><?php _e('Search', 'exray-framework'); ?></h4>
