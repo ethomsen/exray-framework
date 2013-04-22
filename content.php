@@ -23,7 +23,7 @@
 
 				<ul class="categories">
 					<li><span class="icon categories">K</span></li>
-					<?php the_category(',&nbsp;'); ?>	                     
+					<?php the_category(',&nbsp;'); ?>	                    
 				</ul>
 
 				<?php 
