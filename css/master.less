@@ -236,6 +236,8 @@ blockquote{
 								a{
 									margin-right:0;
 									padding: 0 1em;
+									display: block; 
+									white-space: nowrap;
 									
 									&:hover{
 										background:darken(@menu-color,3%);
@@ -352,7 +354,7 @@ blockquote{
 	 			font-size: 12px;
 	 			height: 32px;
 	 			line-height: 32px;
-	 			padding: 0 2em;
+	 			padding: 0 2em;  
 	 			.transition;
 	 			text-transform: uppercase;
 	 				 			
@@ -378,7 +380,7 @@ blockquote{
 		 			visibility: hidden;
 		 			.transition;
 		 			position: absolute;
-		 			left: 0em;
+		 			left: 0;
 		 			
 		 		
 		 		li{
@@ -388,7 +390,8 @@ blockquote{
 					border-bottom: 1px solid darken(@menu-color, 10%);
 		 			a{
 		 				margin-right: 0;	
-		 				
+		 				white-space: nowrap;  
+      					display: block;       // Weird bug CSS dropdown menu
 				 	}
 		 			
 		 			ul{
@@ -431,15 +434,17 @@ blockquote{
 		    font-size: 12px;
 		    line-height: 1em;
 		    margin: 0 2px 0 8px;
-		    color:darken(@dark-gray,5%);
-		    
-		    
+		    color:darken(@dark-gray,5%);    
 		}
 
 		.categories, .tags{
 		    margin-right:3px;
 		}
 		
+		.categories a{
+			display: inline-block;
+		}
+
 		.left-meta-icon{
 			margin-left:0px;
 		}
@@ -1121,7 +1126,7 @@ form{
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 
-	.main-sidebar, .top-menu-navigation, .main-menu-navigation{
+	 .top-menu-navigation, .main-menu-navigation{  //.main-sidebar,
 		display: none;
 	}
 
@@ -1153,7 +1158,7 @@ form{
 
 /* All Mobile Sizes (devices and browser) */
 @media only screen and (max-width: 767px) {
-   .main-sidebar, .top-menu-navigation, .main-menu-navigation{
+   .top-menu-navigation, .main-menu-navigation{ //.main-sidebar, 
 		display: none;
 	}
 
