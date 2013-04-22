@@ -3,38 +3,62 @@
 add_action( 'customize_register', 'exray_customize_register');
 
 function exray_customize_register($wp_customize){
-	// Logo Section
+
+	/* Create Theme Customizer sections */
+		
 	$wp_customize->add_section('exray_logo', array(
 		'title' => __('Logo', 'exray-framework'),
 		'description' => __('Upload your Website logo below', 'exray-framework'),
 		'priority' => '35'
 	));
 	
-	$wp_customize->add_setting('exray_custom_settings[exray_theme_logo]', array(
-		'default' => THEME_IMAGES.'/logo.png',
-		'type' => 'option'
-	));
-	
-	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'exray_theme_logo', array(
-		'label' => __('Upload Website logo', 'exray_framework'),
-		'section' => 'exray_logo',
-		'settings' => 'exray_custom_settings[exray_theme_logo]'
-	)));
-	
-	//Top Ad Section on Theme Customizer
+		//Top Ad Section on Theme Customizer
 	$wp_customize->add_section('exray_ad', array(
 		'title' => __('Top Ad', 'exray-framework'),
 		'description' => __('Allow you to upload ad Banner on the top of the page', 'exray-framework'),
 		'priority' => '36' 
 	));
+	
 
-	// Add setting for checkbox enable displaying Top Ad (setting saved to db).
-	$wp_customize->add_setting('exray_custom_settings[display_top_ad]', array(
-			'default' => '0',
-			'type' => 'option'
+	
+	/* Theme Customizer setting & control */	
+	
+	/* Display logo */
+	
+	$wp_customize->add_setting('exray_custom_settings[display_logo]', array(
+			'default'=>'0',
+			'type'=>'option' 
+		));
+	
+	$wp_customize->add_control('exray_custom_settings[display_logo]', array(
+		'label'=> 'Display Website logo?',
+		'section'=>'exray_logo',
+		'settings'=>'exray_custom_settings[display_logo]',
+		'type'=>'checkbox'	
 	));
 
-	// Add checkbox field/control to Theme Customizer
+	
+	 /*Logo upload control*/	
+	$wp_customize->add_setting('exray_custom_settings[exray_theme_logo]', array(
+			'default' => THEME_IMAGES.'/logo.png',
+			'type' => 'option'
+		));
+		
+	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'exray_theme_logo', array(
+		'label' => __('Upload Website logo', 'exray_framework'),
+		'section' => 'exray_logo',
+		'settings' => 'exray_custom_settings[exray_theme_logo]'
+	)));
+
+	
+	/*Add setting for checkbox enable displaying Top Ad (setting saved to db).*/
+	
+	$wp_customize->add_setting('exray_custom_settings[display_top_ad]', array(
+				'default' => '0',
+				'type' => 'option'
+		));
+	
+	// Add checkbox control to Theme Customizer
 	$wp_customize->add_control('exray_custom_settings[display_top_ad]',array(
 		'label' => __('Display Top Ad?', 'exray-framework'),
 		'section' =>  'exray_ad',
@@ -42,14 +66,15 @@ function exray_customize_register($wp_customize){
 		'type' => 'checkbox'
 
 	));
+	
 
-	// Setting for Banner Ad
+	/*Setting for Banner Ad*/	
 	$wp_customize->add_setting('exray_custom_settings[top_ad]', array(
-			'default' => 'http://lorempixel.com/468/60',
-			'type' => 'option'
-	));
-
-	// Add Image upload field/control to Theme Customizer
+				'default' => 'http://lorempixel.com/468/60',
+				'type' => 'option'
+		));
+	
+	// Add Image upload control to Theme Customizer
 	$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'top_ad', array(
 		'label' => __('Upload Top Banner Image', 'exray-framework'),
 		'section' => 'exray_ad',
@@ -58,13 +83,15 @@ function exray_customize_register($wp_customize){
 	
 	)));
 
-	// Add setting for Ad link.
+
+	/* Add setting for Ad link.*/
+
 	$wp_customize->add_setting('exray_custom_settings[top_ad_link]', array(
 			'default' => 'http://google.com',
 			'type' => 'option'
 	));
 
-	// Add Ad link textbox field/control to Theme Customizer
+	// Add Ad link textbox control to Theme Customizer
 	$wp_customize->add_control('exray_custom_settings[top_ad_link]',array(
 		'label' => __('Link for Ad', 'exray-framework'),
 		'section' =>  'exray_ad',
@@ -73,26 +100,143 @@ function exray_customize_register($wp_customize){
 
 	));
 	
-	$wp_customize->add_section('exray_theme_color', array(
-		'title' => __('Customize Color Scheme', 'exray-framework'),
-		'description' => __('Allow you to customize website color', 'exray-framework'),
-		'priority' => '37' 
-	));
+	/* Colors Section */
 	
-    $wp_customize->add_setting('exray_custom_settings[link_color]', array(
-        'default'           => '0d72c7',
-        'sanitize_callback' => 'sanitize_hex_color',
-        'capability'        => 'edit_theme_options',
-        'type'           => 'option',
-    ));
+	$exray_theme_customizer_colors = array();
 	
-	 $wp_customize->add_control( new WP_Customize_Color_Control($wp_customize, 'link_color', array(
-        'label'    => __('Link Color', 'exray-framework'),
-        'section'  => 'exray_theme_color',
-        'settings' => 'exray_custom_settings[link_color]',
-    )));
- 
+	//Link color
+	$exray_theme_customizer_colors[] = array(
+		'settings' => 'exray_custom_settings[link_color]',
+		'default' => '0d72c7',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'type' => 'option',
+		'label' =>__('Link Color', 'exray-framework'),
+		'section' => 'colors'
+	);
 
+	// Top Navigation color
+	$exray_theme_customizer_colors[] = array(
+		'settings' => 'exray_custom_settings[top_menu_color]',
+		'default' => 'f5f5f5',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'type' => 'option',
+		'label' =>__('Top Menu Color', 'exray-framework'),
+		'section' => 'colors'
+	);
+
+	// Header color
+	$exray_theme_customizer_colors[] = array(
+		'settings' => 'exray_custom_settings[header_color]',
+		'default' => 'ffffff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'type' => 'option',
+		'label' =>__('Header Color', 'exray-framework'),
+		'section' => 'colors'
+	);
+
+	// Main Navigation color
+	$exray_theme_customizer_colors[] = array(
+		'settings' => 'exray_custom_settings[main_menu_color]',
+		'default' => 'f5f5f5',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'type' => 'option',
+		'label' =>__('Main Menu Color', 'exray-framework'),
+		'section' => 'colors'
+	);
+
+	// Background color
+	$exray_theme_customizer_colors[] = array(
+		'settings' => 'exray_custom_settings[bg_color]',
+		'default' => 'ffffff',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'type' => 'option',
+		'label' =>__('Background Color', 'exray-framework'),
+		'section' => 'colors'
+	);
+
+	// Footer area color
+	$exray_theme_customizer_colors[] = array(
+		'settings' => 'exray_custom_settings[footer_color]',
+		'default' => 'f2f2f2',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'type' => 'option',
+		'label' =>__('Footer Color', 'exray-framework'),
+		'section' => 'colors'
+	);
+
+	// Copyright area color
+	$exray_theme_customizer_colors[] = array(
+		'settings' => 'exray_custom_settings[copyright_container_color]',
+		'default' => 'ededed',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'type' => 'option',
+		'label' =>__('Bottom container Color', 'exray-framework'),
+		'section' => 'colors'
+	);
+
+	// Initialize setting and render all Theme Customizer control
+	foreach($exray_theme_customizer_colors as $field)
+  	{
+ 		 // SETTINGS
+	    $wp_customize->add_setting( $field['settings'], array( 
+	    	'default' => $field['default'],
+	    	'sanitize_callback' => $field['sanitize_callback'],
+	    	'type' =>  $field['type']
+	    ));
+
+	    // CONTROLS
+	    $wp_customize->add_control( new WP_Customize_Color_Control( $wp_customize, $field['settings'], array( 
+	    	'label' => $field['label'], 
+	    	'section' => $field['section'],
+	     	'settings' => $field['settings'] 
+	     )));
+		 		 
+	}
+	
+}
+
+/***************************************************************/
+/* Theme Color */
+/***************************************************************/
+add_action('wp_head', 'exray_theme_customize_css');
+
+function exray_theme_customize_css(){
+	$options = get_option( 'exray_custom_settings' );
+
+?>
+	 <style type="text/css">
+	 
+		/*Link*/
+		a, p a, h5 a { 
+			color:<?php echo $options['link_color']; ?>; 
+		}
+
+		/*Top Navigation*/
+		.top-menu-container{
+			background: <?php echo $options['top_menu_color']; ?>;
+		}
+		.header-container {
+			background:  <?php echo $options['header_color']; ?>;
+		}
+		/*Main Navigation */
+		.main-menu-container{
+			background: <?php echo $options['main_menu_color']; ?>;
+		}
+
+		.wrap{
+			background: <?php echo $options['bg_color']; ?> 
+		}
+
+		.footer-widget-area{
+			background: <?php echo $options['footer_color']; ?>;
+		}
+
+		.copyright-container{
+			background: <?php echo $options['copyright_container_color']; ?>;
+		}	
+	   
+	 </style>
+<?php
 }
 
 ?>
