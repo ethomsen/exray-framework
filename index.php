@@ -15,7 +15,6 @@
 					<div class="slider">
 						<div class="url-container format-link"><blockquote><h1>This is SLider content Example </h1></blockquote></div>
 					</div>
-					End Experimental
 					
 					<?php endif; ?>
 					
@@ -42,25 +41,17 @@
 
 					<?php 
 
-						$options = get_option('exray_manage_history_options');			
-
-						if($options['show_history']){
-							echo '<input type="text" value="'.$options['facebook'].'"/>';
-						}
-
 						$social_options = get_option('exray_theme_social_options');
 
 						if(isset($options['checkbox_element']) && $social_options['exray_theme_twitter'] ){
 							echo '<a href="'.$social_options['exray_theme_twitter'].'">@fujianto</a>';
 						}
-						echo '<a href="'.$social_options['exray_theme_twitter'].'">@fujianto</a>';
 
 					?>	
 
 					<?php 
 						$options = get_option( 'exray_theme_input_options' );
-						echo sanitize_text_field( $options['input_element'] );
-						echo sanitize_text_field( $options['textarea_element'] );
+					
 
 						if(isset($options['checkbox_element']) && $options['checkbox_element'] == '1'){
 							echo '<h2>Checkbox Checked</h2>';
