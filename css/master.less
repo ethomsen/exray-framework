@@ -110,11 +110,6 @@ h1{
 h2{
 	font-size: 26px;
 	font-family: @heading-font;
-	
-	// font-size: 24px;
-	// font-family: @heading-font;
-	// line-height: 1.2em;
-
 }
 
 
@@ -124,10 +119,6 @@ h3{
 }
 
 h4{
-	// font-size: 18px;
-	// line-stacking: 42px;
-	// height: 42px;
-	
 	font-size: 16px;
 	line-height: 16px;
 	height: 42px;
@@ -163,7 +154,11 @@ blockquote{
 	
 }
 
-
+img.centered { 
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
 
 /* Header */
 .header-container{
@@ -983,9 +978,7 @@ form{
 	li{
 		
 		figure a img {
-			max-width: 80%;
-			margin: 0 0 0 33px;		
-			
+			max-width: 100%;
 		}
 	}
 }
@@ -1144,7 +1137,7 @@ form{
 	#primary{
 		float: left;
 		width: 100%;
-		margin-left: 0;
+		//margin-left: 0;
 		
 	}
 	
@@ -1200,7 +1193,7 @@ form{
 /* Mobile Landscape Size to Tablet Portrait (devices and browsers) */
 @media only screen and (min-width: 480px) and (max-width: 767px) {
 	.right-header-widget{
-		float: left;
+		float: none;
 		max-width: 100%;
 
 		img{
@@ -1223,7 +1216,30 @@ form{
 		}
 	}
 		
-	
+	//Make logo align center
+    #header-wrap .logo-container h1 {
+		margin-bottom: 0;
+		text-align: center;
+	}
+
+	//More padding for top Ad
+	#header-wrap .right-header-widget {
+		margin-top: 1em;
+		padding: 1em;
+	}
+
+	// More margin for widget
+	.sidebar-widget {
+		margin-bottom: 1.5em;
+		margin-top: 1.5em;
+		font-size: 12px;
+	}
+
+	//More margin for widget footer widget 
+	.footer-widget {
+		font-size: 12px;
+		margin-bottom: 1.5em;
+	}
 }
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
@@ -1288,6 +1304,31 @@ form{
 				}
 			}
 		}
+	}
+
+		//Make logo align center
+    #header-wrap .logo-container h1 {
+		margin-bottom: 0;
+		text-align: center;
+	}
+
+	//More padding for top Ad
+	#header-wrap .right-header-widget {
+		margin-top: 1em;
+		padding: 1em;
+	}
+
+	// More margin for widget
+	.sidebar-widget {
+		margin-bottom: 1.5em;
+		margin-top: 1.5em;
+		font-size: 12px;
+	}
+
+	//More margin for widget footer widget 
+	.footer-widget {
+		font-size: 12px;
+		margin-bottom: 1.5em;
 	}
 }
 

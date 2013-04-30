@@ -88,7 +88,7 @@
 						<aside id="header-widget" class="right-header-widget fr top-widget" role="complementary">
 
 							<figure class="banner">
-								<a href="<?php echo $options['top_ad_link']; ?>"><img src="<?php echo $options['top_ad']; ?>" alt="Ad"></a>
+								<a href="<?php echo $options['top_ad_link']; ?>"><img src="<?php echo $options['top_ad']; ?>" class="centered" alt="Ad"></a>
 							</figure>
 
 						</aside>		

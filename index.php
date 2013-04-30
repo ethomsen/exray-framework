@@ -6,68 +6,7 @@
 			<div class="row">
 			
 				<div class="span6 article-container-adaptive" id="main">
-					<?php 
-
-					$options = get_option('exray_theme_display_options');
-
-					if(isset($options['show_slider']) && $options['show_slider']): ?>
-					<!-- Experimental -->
-					<div class="slider">
-						<div class="url-container format-link"><blockquote><h1>This is SLider content Example </h1></blockquote></div>
-					</div>
-					End Experimental
 					
-					<?php endif; ?>
-					
-					<?php 
-					if( get_option('show_quiz')): ?>
-					<!-- Experimental -->
-					<div class="quiz">
-						<div class="url-container format-link"><blockquote><h1>This is QUIZZZ! </h1></blockquote></div>
-					</div>
-					<!-- End Experimental -->
-					
-					<?php endif; ?>
-
-					<?php 
-					$options = get_option('exray_manage_coupon_options');
-					if(isset($options['show_coupon']) && $options['show_coupon']): ?>
-					<!-- Experimental -->
-					<div class="quiz">
-						<div class="url-container format-link"><blockquote><h1>This is COUPON! </h1></blockquote></div>
-					</div>
-					<!-- End Experimental -->
-					
-					<?php endif; ?>
-
-
-					<?php 
-						$options = get_option( 'exray_theme_input_options' );
-						echo sanitize_text_field( $options['input_element'] );
-						echo sanitize_text_field( $options['textarea_element'] );
-
-						if(isset($options['checkbox_element']) && $options['checkbox_element'] == '1'){
-							echo '<h2>Checkbox Checked</h2>';
-						}else{
-							echo '<h3>NOT CHecked</h3>';
-						}
-
-						if(isset($options['radio_element']) && $options['radio_element'] == '1'){
-							echo '<h2>MALE</h2>';
-						}else if(isset($options['radio_element']) && $options['radio_element'] == '2'){
-							echo '<h3>FEMALE</h3>';
-						}
-						if(isset($options['select_element']) &&  $options['select_element'] == 'never'){
-							echo '<h2>never</h2>';
-						} else if(isset($options['select_element']) &&  $options['select_element'] == 'sometimes'){
-							echo '<h2>sometimes</h2>';
-						} else if(isset($options['select_element']) &&  $options['select_element'] == 'always'){
-							echo '<h2>always</h2>';
-						} else{
-							echo '<h2>Default</h2>';
-						}
-					?>
-
 					<div class="content" role="main">
 							<?php if(have_posts()) : while (have_posts()): the_post(); ?>		
 								<!-- The Loop of Post -->
