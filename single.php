@@ -6,7 +6,9 @@
 		<div class="row">
 		
 			<div class="span6 article-container-adaptive" id="main">
-				
+					<?php if ( function_exists('yoast_breadcrumb') ) {
+						yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+					} ?>
 				<div class="content" role="main">
 						
 					<?php if(have_posts()) : while(have_posts()) : the_post(); ?>				

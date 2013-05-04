@@ -119,13 +119,16 @@ if(function_exists('add_theme_support')){
 	add_theme_support('post-formats', array('link', 'quote', 'gallery', 'aside'));
 	add_theme_support('post-thumbnails', array('post'));
 	set_post_thumbnail_size( 150, 150, true);
+	add_theme_support('automatic-feed-links');
+
+	if ( function_exists( 'add_image_size' ) ) {
+		add_image_size('custom-blog-image', 542, 342); 
+		add_image_size( 'category-thumb', 300, 9999 ); //300 pixels wide (and unlimited height)
+		add_image_size( 'homepage-thumb', 220, 180, true ); //(cropped)
+	}
 }
 
-if ( function_exists( 'add_image_size' ) ) {
-	add_image_size('custom-blog-image', 542, 342); 
-	add_image_size( 'category-thumb', 300, 9999 ); //300 pixels wide (and unlimited height)
-	add_image_size( 'homepage-thumb', 220, 180, true ); //(cropped)
-}
+
 
 /***************************************************************/
 /* Add infinity symbol on Post Format Aside */
@@ -264,13 +267,19 @@ require_once ('functions/widget-ad-260.php');
 /***************************************************************/
 /* Register/ Create Theme Customizer Option Field*/
 /***************************************************************/
-require_once ('functions/exray-customizer.php');
+require_once ('functions/exray-theme-customizer.php');
 
+/***************************************************************/
+/* Theme default css ,custom css from Theme Customizer and Custom css*/
+/***************************************************************/
+require_once('functions/exray-theme-stylesheet.php');
 
 /***************************************************************/
 /* Register/ Create Theme Option Page*/
 /***************************************************************/
 require_once ('functions/exray-theme-options.php');
+
+
 
 ?>
 

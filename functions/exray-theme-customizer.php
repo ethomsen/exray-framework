@@ -7,18 +7,23 @@ function exray_customize_register($wp_customize){
 	/* Create Theme Customizer sections */
 		
 	$wp_customize->add_section('exray_logo', array(
-		'title' => __('Logo', 'exray-framework'),
-		'description' => __('Upload your Website logo below', 'exray-framework'),
-		'priority' => '35'
+		'title' 		=> __('Logo', 'exray-framework'),
+		'description' 	=> __('Upload your Website logo below', 'exray-framework'),
+		'priority'		=> '35'
 	));
 	
 		//Top Ad Section on Theme Customizer
 	$wp_customize->add_section('exray_ad', array(
-		'title' => __('Top Ad', 'exray-framework'),
-		'description' => __('Allow you to upload ad Banner on the top of the page', 'exray-framework'),
-		'priority' => '36' 
+		'title' 		=> __('Top Ad', 'exray-framework'),
+		'description' 	=> __('Allow you to upload ad Banner on the top of the page', 'exray-framework'),
+		'priority' 		=> '36' 
 	));
 	
+	$wp_customize->add_section('exray_email', array(
+		'title' 		=> __('Contact Email', 'exray-framework'),
+		'description' 	=> __('Contact form email address destination'),
+		'priority'		=> '36.5'
+	));
 
 	
 	/* Theme Customizer setting & control */	
@@ -104,13 +109,13 @@ function exray_customize_register($wp_customize){
 	
 	$exray_theme_customizer_colors = array();
 	
-	//Link color
+	// Top Navigation color
 	$exray_theme_customizer_colors[] = array(
-		'settings' => 'exray_custom_settings[link_color]',
-		'default' => '0d72c7',
+		'settings' => 'exray_custom_settings[top_menu_color]',
+		'default' => 'f5f5f5',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
-		'label' =>__('Link Color', 'exray-framework'),
+		'label' =>__('Top Menu Color', 'exray-framework'),
 		'section' => 'colors'
 	);
 
@@ -121,6 +126,16 @@ function exray_customize_register($wp_customize){
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Top Menu Color', 'exray-framework'),
+		'section' => 'colors'
+	);
+
+	// Link color
+	$exray_theme_customizer_colors[] = array(
+		'settings' => 'exray_custom_settings[link_color]',
+		'default' => '0d72c7',
+		'sanitize_callback' => 'sanitize_hex_color',
+		'type' => 'option',
+		'label' =>__('Link Color', 'exray-framework'),
 		'section' => 'colors'
 	);
 
@@ -192,51 +207,23 @@ function exray_customize_register($wp_customize){
 	     )));
 		 		 
 	}
+
+	/* Add setting for Email Address */
+
+	$wp_customize->add_setting('exray_custom_settings[contact_email]', array(
+			'default' => get_option('admin_email'),
+			'type' => 'option'
+	));
+
+	// Add Email textbox control to Theme Customizer
+	$wp_customize->add_control('exray_custom_settings[contact_email]',array(
+		'label' => __('Email address', 'exray-framework'),
+		'section' =>  'exray_email',
+		'settings' => 'exray_custom_settings[contact_email]',
+		'type' => 'text'
+
+	));
 	
-}
-
-/***************************************************************/
-/* Theme Color */
-/***************************************************************/
-add_action('wp_head', 'exray_theme_customize_css');
-
-function exray_theme_customize_css(){
-	$options = get_option( 'exray_custom_settings' );
-
-?>
-	 <style type="text/css">
-	 
-		/*Link*/
-		a, p a, h5 a { 
-			color:<?php echo $options['link_color']; ?>; 
-		}
-
-		/*Top Navigation*/
-		.top-menu-container{
-			background: <?php echo $options['top_menu_color']; ?>;
-		}
-		.header-container {
-			background:  <?php echo $options['header_color']; ?>;
-		}
-		/*Main Navigation */
-		.main-menu-container{
-			background: <?php echo $options['main_menu_color']; ?>;
-		}
-
-		.wrap{
-			background: <?php echo $options['bg_color']; ?> 
-		}
-
-		.footer-widget-area{
-			background: <?php echo $options['footer_color']; ?>;
-		}
-
-		.copyright-container{
-			background: <?php echo $options['copyright_container_color']; ?>;
-		}	
-	   
-	 </style>
-<?php
 }
 
 ?>
