@@ -49,30 +49,30 @@
         //Check if errors occures
         if(!$error_name && !$error_email && !$error_message){
             //Get the received email
-            $options = get_option('exray_custom_settings');
-            $receiver_email = $options['contact_email'];
-            
+            $options = get_option('exray_theme_general_options');
+            $receiver_email = ( $options['contact_form_email_receiver'] == '' ? get_option( 'admin_email' ) : $options['contact_form_email_receiver'] );
+       
             $subject = 'You have been contacted by: '. $name;
             $body = "You have been contacted by $name. Their message is:". PHP_EOL. PHP_EOL;
             $body .= $message . PHP_EOL. PHP_EOL;
-            $body .= "You can contact $name via email at $email";
+            $body .= "You can contact $name via email at $email ";
             if($website != ''){
-                $body .= "and visit their website at $website";
+                $body .= "and visit their website at $website ";
             }
             $body .= PHP_EOL . PHP_EOL;
 
-            $headers = "From $email". PHP_EOL;
-            $headers.= "Reply to: $email". PHP_EOL;
-            $headers .= "MIME-version: 1.0". PHP_EOL;
-            $headers .= "Content-type: text/plain; charset=utf-8". PHP_EOL;
-            $headers .= "Content-Transfer-Encoding: quoted-printable". PHP_EOL;
+            $headers = "From: $email" . PHP_EOL;
+			$headers .= "Reply-To: $email" . PHP_EOL;
+			$headers .= "MIME-Version: 1.0" . PHP_EOL;
+			$headers .= "Content-type: text/plain; charset=utf-8" . PHP_EOL;
+			$headers .= "Content-Transfer-Encoding: quoted-printable" . PHP_EOL;
 
-            if (mail($receiver_email, $subject, $body, "From:bar@foo.com\r\n")) {
+            if (mail($receiver_email, $subject, $body, $headers)) {
                 $email_sent = true;
             } else{
                 $email_sent = false;
             }
-
+    
         }
 
     }
@@ -83,12 +83,12 @@
 <div class="container" id="main-container">
 	
 	<div class="row">
-	
+
 		<div class="span6 article-container-adaptive" id="main">
 			
 			<div class="content" role="main">
-
-				<?php if(have_posts()) : while(have_posts()) : the_post(); ?>				
+				
+				<?php  if(have_posts()) : while(have_posts()) : the_post(); ?>				
 				<article class="post clearfix" id="post-1" role="article">
 					
 					<header>
@@ -150,7 +150,7 @@
 								<input type="text" value="<?php if(isset ($_POST['contact-email'])) echo $_POST['contact-email'];  ?>" name="contact-email" id="contact-email"/>
 							</p>
 							<p>
-								<label for="contact-website"><?php _e('Website*', 'exray-framework'); ?></label>
+								<label for="contact-website"><?php _e('Website', 'exray-framework'); ?></label>
 								<input type="text" value="<?php if(isset ($_POST['contact-website'])) echo $_POST['contact-website'];  ?>" name="contact-website" id="contact-website"/>
 							</p>
 							<p <?php if($error_message) echo 'class="p-errors"'; ?>>
@@ -199,12 +199,7 @@
 				<?php endif ?>
 
 					<!-- End article-author -->
-					<div class="comment-area" id="comments">
-						
-						<?php comments_template('', true); ?>
-
-					</div>
-					<!-- End comment-area -->
+	
 			</div> 
 			<!-- end content -->
 		</div> 
