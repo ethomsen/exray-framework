@@ -50,7 +50,7 @@ Please add all your custom CSS here and avoid modifying the core theme files, si
 
 		 	<?php 
 		 		if($active_tab == 'general_options'){
-		 			echo 'You can add analytics scripts below. If you are looking to modify visual appearance, please go to <a href="customize.php">Theme Customize</a>';
+		 			// echo 'You can add analytics and other scripts below. If you are looking to modify visual appearances, please go to <a href="customize.php">Theme Customize</a>';
 		 			settings_fields( 'exray_theme_general_options_group' );
 		 			do_settings_sections( 'exray_theme_general_options_page' );
 		 		}
@@ -83,7 +83,7 @@ Please add all your custom CSS here and avoid modifying the core theme files, si
 function exray_theme_general_options_init(){
 
 	if(false == get_option('exray_theme_general_options') ){
-		add_option('exray_theme_general_options');
+		add_option('exray_theme_general_options', apply_filters( 'exray_theme_default_general_options', exray_theme_default_general_options() ) );
 	}
 
 	add_settings_section( 
@@ -91,6 +91,14 @@ function exray_theme_general_options_init(){
 		'General Options', 
 		'', 
 		'exray_theme_general_options_page' 
+	);
+
+	add_settings_field( 
+		'contact_form_email_receiver', 
+		__('Contact form email receiver', 'exray-framework'), 
+		'contact_form_email_receiver_callback', 
+		'exray_theme_general_options_page', 
+		'exray_theme_general_options_section'
 	);
 
 	add_settings_field( 
@@ -126,6 +134,18 @@ function exray_theme_custom_css_init(){
 	);
 }
 
+function contact_form_email_receiver_callback(){
+	$options = get_option( 'exray_theme_general_options');
+	$email = '';
+
+	if( isset($options['contact_form_email_receiver'] ) ){
+		$email = $options['contact_form_email_receiver'];
+	}
+
+	echo '<input type="text" name="exray_theme_general_options[contact_form_email_receiver]" id="contact_form_email_receiver" value="'. $email .'" style="width:300px;"/>';
+	
+}
+
 function add_to_head_callback(){
 	$options = get_option( 'exray_theme_general_options' );
 
@@ -151,6 +171,17 @@ function exray_theme_add_to_footer(){
 	echo $options['add_to_footer'];
 }
 
+/* Default values for General Options. */
+function exray_theme_default_general_options() {
+	
+	$defaults = array(
+		'contact_form_email_receiver' =>  get_option('admin_email'),
+		'add_to_head' => '',
+		'add_to_footer' => ''
+	);
+	
+	return apply_filters( 'exray_theme_default_general_options', $defaults );	
+}
 
 function exray_theme_display_validation( $input ) {
     if ( ! empty( $input['exray_custom_css'] ) )
