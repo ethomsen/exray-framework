@@ -154,6 +154,11 @@ blockquote{
 	
 }
 
+img, video, select {
+	max-width: 100%;
+	height: auto;
+}
+
 img.centered { 
     display: block; 
     margin-left: auto; 
@@ -885,12 +890,12 @@ img.centered {
 					li{
 						position: relative;
 						padding-left: 1em;
-						
-						&::before{
-							content: '-';
-							position: absolute;
-							left: 0;
-						}
+
+						// &::before{
+						// 	content: '-';
+						// 	position: absolute;
+						// 	left: 0;
+						// }
 					}
 				}
 					
