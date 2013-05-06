@@ -61,15 +61,10 @@ function exray_theme_customize_css(){
 					<?php endif; ?>
 				}
 
-		.top-menu-navigation ul > li a{
-			color: <?php echo getContrastYIQ($options['top_menu_color']);?> !important;
+		.top-menu-container .top-menu-navigation ul > li a, .top-menu-container .top-menu-navigation ul > li a::before, .adaptive-top-nav li a{
+			color: <?php echo getContrastYIQ($options['top_menu_color']);?> ;
 		}
 		
-			.top-menu-navigation ul > li a::before{
-				color: <?php echo getContrastYIQ($options['top_menu_color']); ?> !important;
-			 }
-
-
 		.header-container {
 			background:  <?php echo $options['header_color']; ?>;
 		}
@@ -112,14 +107,10 @@ function exray_theme_customize_css(){
 					<?php endif; ?>
 				}
 
-		.main-menu-container  .main-menu-navigation ul > li a{
+		.main-menu-container  .main-menu-navigation ul > li a, .adaptive-main-nav li a {
 			color: <?php echo getContrastYIQ($options['main_menu_color']); ?> ;
 		}
-		
-		.main-menu-navigation ul > li a::before{
-				color: <?php echo getContrastYIQ($options['main_menu_color']); ?> ;
-			 }
-		
+
 		/*Background color*/
 		.wrap{
 			background: <?php echo $options['bg_color']; ?> ; 
