@@ -19,12 +19,6 @@ function exray_customize_register($wp_customize){
 		'priority' 		=> '36' 
 	));
 	
-	$wp_customize->add_section('exray_email', array(
-		'title' 		=> __('Contact Email', 'exray-framework'),
-		'description' 	=> __('Contact form email address destination'),
-		'priority'		=> '36.5'
-	));
-
 	
 	/* Theme Customizer setting & control */	
 	
@@ -207,22 +201,6 @@ function exray_customize_register($wp_customize){
 	     )));
 		 		 
 	}
-
-	/* Add setting for Email Address */
-
-	$wp_customize->add_setting('exray_custom_settings[contact_email]', array(
-			'default' => get_option('admin_email'),
-			'type' => 'option'
-	));
-
-	// Add Email textbox control to Theme Customizer
-	$wp_customize->add_control('exray_custom_settings[contact_email]',array(
-		'label' => __('Email address', 'exray-framework'),
-		'section' =>  'exray_email',
-		'settings' => 'exray_custom_settings[contact_email]',
-		'type' => 'text'
-
-	));
 	
 }
 
