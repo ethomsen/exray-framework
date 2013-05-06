@@ -61,7 +61,7 @@
 			<div class="container" id="header-wrap">
 
 				<div class="row">
-					<div class="span3 logo-container"> 
+					<div class="span6 logo-container"> 
 	
 						<?php if($options['display_logo'] != 0) : ?>
 						<!-- Display logo Image -->
@@ -82,7 +82,7 @@
 						
 					</div>	
 					<!-- End span3 --> 	
-					<div class="span9 clearfix">
+					<div class="span6 clearfix">
 
 						<?php if($options['display_top_ad'] && $options['top_ad'] !='') : ?>
 
