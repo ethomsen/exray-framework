@@ -427,7 +427,7 @@ img.centered {
 		box-shadow: 0px 0px 7px #D7D7D7;
 		margin: 0 0 2em 0;
 	}
-	
+
 	article{	
 		.icon {
 		    font-family: "WebSymbolsRegular";
@@ -453,6 +453,12 @@ img.centered {
 			margin-bottom: 1em;		
 		}
 		
+		&.sticky {
+			background: @bevel-color;
+			padding: 1.5em 1em 0.5em 1em;
+			border: 1px solid @dark-gray;
+		}
+
 		.aside-container{
 			background: lighten(@dark-gray,10%);
 			padding: 8px 5px 8px 15px;
@@ -562,8 +568,8 @@ img.centered {
 			font-size: 12px;
 			margin-top: 3em;
 			margin-bottom: 1.5em;
-			line-height: 42px;
-			height: 42px;
+			line-height: 2.5em;
+			height: auto;
 		}
 		
 		.post-pagination{
@@ -674,15 +680,17 @@ img.centered {
 	margin: 1.5em 0 1.5em 2em;	
 }
 
-.wp-caption{
+.wp-caption, .wp-caption .wp-caption-text,
+.gallery-caption,
+.entry-caption{
 	text-align: center;
+	margin-bottom: 0;
+	font-size: 12px;
+	font-style: italic;
+	line-height: 34px;
+	max-width: 100%;
+	height: auto;
 	
-	.wp-caption-text{
-		margin-bottom: 0;
-		font-size: 12px;
-		font-style: italic;
-		line-height: 34px;
-	}
 }
 
 .video-container + p{
@@ -705,6 +713,20 @@ img.centered {
 	margin-top: 2.5em;
 	counter-reset: comment-id;
 	
+	.bypostauthor{
+		background: lighten(@link-color, 50%);
+		border: 1px solid lighten(@link-color,40%);
+		border-bottom: 5px solid lighten(@link-color,30%);
+	}
+
+		.bypostauthor header{
+			border-bottom: 1px solid lighten(@link-color, 20%);
+
+			&::before{
+				color: @link-color;
+			}
+		}
+
 	li ol, li ul{
 		padding-left: 3em;
 		margin-left: 3em;
@@ -793,6 +815,13 @@ img.centered {
 
 .comments-nav-section{
 	margin: 3em 0;
+}
+
+#cancel-comment-reply-link {
+	font-size: 12px;
+	display: block;
+	font-family: @body-font;
+	margin-top: 1em;
 }
 
 #comment-form, #contact-form{
@@ -948,6 +977,15 @@ form{
 		
 	}
 
+}
+
+input[type="password"]{
+	border:  1px solid @dark-gray;
+	padding: .5em;
+
+	&:hover, &:focus{
+			border-color: darken(@border-color,10%);
+	}
 }
 
 #search-title{
