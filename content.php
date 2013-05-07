@@ -58,7 +58,7 @@
 
 <div class="entry-content">
 
-	<?php the_excerpt(); //the_content('Read more &raquo;'); ?>
+	<?php the_excerpt(); ?>
 	
 </div>
 </article> 	

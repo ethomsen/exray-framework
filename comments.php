@@ -42,7 +42,9 @@ if(have_comments()): ?>
 		</div>
 
 	<?php endif; ?>
+
 <?php elseif(!comments_open() && !is_page() && post_type_supports( get_post_type(), 'comments' )) : ?>
+	
 	<p><?php _e('Comments are closed','exray-framework'); ?></p>
 
 <?php endif;
