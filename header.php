@@ -23,7 +23,8 @@
 	<link rel="apple-touch-icon" type="image/x-icon" href="<?php print THEME_IMAGES; ?>/icons/apple-touch-icon.png" />
 	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="<?php print THEME_IMAGES; ?>/icons/apple-touch-icon-72x72.png" />
 	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="<?php print THEME_IMAGES; ?>/icons/apple-touch-icon-114x114.png" />
-
+	<!-- Script required for extra functionality on the comment form -->
+	<?php if (is_singular()) wp_enqueue_script( 'comment-reply' ); ?>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class() ?> >
@@ -43,13 +44,12 @@
 			
 			<div class="top-menu-container">
 				<div class="container">
-					
-					<?php wp_nav_menu(array(
-								'theme-location' => 'top-menu',
-								'fallback_cb'     => 'wp_page_menu',
-								'container' => 'nav',
-								'container_class' => 'top-menu-navigation clearfix'
-					)) ;?>
+									
+					<nav class="top-menu-navigation clearfix" role="navigation">
+
+						<?php wp_nav_menu( array( 'theme_location' => 'top-menu', 'container' => 'false' ) ); ?>
+
+					</nav>
 					
 					<a href="" class="small-button menus" id="adaptive-top-nav-btn"><?php _e('Menu','exray-framework'); ?></a>
 					<div class="adaptive-top-nav"></div> <!-- End adaptive-top-nav -->
@@ -104,15 +104,13 @@
 			<!-- End container -->
 			<div class="main-menu-container">
 				<div class="container">
-					
-                    <?php wp_nav_menu(array(
-							'theme-location' => 'main-menu',	
-							'fallback_cb'     => 'wp_page_menu',
-							'container' => 'nav',
-							'container_class' => 'main-menu-navigation clearfix'
-					)) ;?>
-						
-				
+
+					<nav class="main-menu-navigation clearfix" role="navigation">
+
+						<?php wp_nav_menu( array( 'theme_location' => 'main-menu', 'container' => 'false' ) ); ?>
+
+					</nav>
+                    
 					<a href="" class="small-button menus" id="adaptive-main-nav-btn"><?php _e('Menu','exray-framework'); ?></a>
 					<div class="adaptive-main-nav"></div> <!-- End adaptive-main-nav -->
 				</div>
