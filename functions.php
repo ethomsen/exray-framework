@@ -11,16 +11,16 @@ define( 'THEME_JS', THEME_URI . '/js' );
 /***************************************************************/
 /* Custom Menu */
 /***************************************************************/
-function register_exray_menu(){
-	register_nav_menus(array(
-			'top-menu' => __('Top menu', 'exray-framework'),
-			'main-menu' => __('Main menu', 'exray-framework')
-		));
+function register_exray_menus() {
+	register_nav_menus(
+		array(
+		  'top-menu' => __( 'Top Menu', 'exray-framework' ),
+		  'main-menu' => __( 'Main Menu', 'exray-framework' )
+		)
+	);
 }
 
-add_action('init', 'register_exray_menu');
-
-
+add_action( 'init', 'register_exray_menus' );
 
 /***************************************************************/
 /* Load Javascript file*/
@@ -183,8 +183,11 @@ function exray_comments($comment, $args, $depth) {
 			<article <?php comment_class('clearfix'); ?>>
 
 				<header>
-					 <h5><?php comment_author_link(); ?></h5>
-					<p><span>on <?php comment_date();?> at <?php comment_time(); ?> - </span><?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))); ?></p>
+					<h5><?php comment_author_link(); ?></h5>
+					<p>
+						<span>on <?php comment_date();?> at <?php comment_time(); ?> - </span>
+						<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
+					</p>
 
 				</header>
 				
@@ -220,12 +223,13 @@ function exray_comments($comment, $args, $depth) {
 /***************************************************************/
 
 function exray_custom_comment_form($defaults){
-
+	
 	$defaults['comment_notes_before'] = ''; 
+	$defaults['comment_notes_after'] = '';
     $defaults['id_form'] = 'comment_form';
-    $defaults['comment_field'] = '<p>
-        <textarea name="comment" id="comment" cols="30" rows="10"> </textarea></p> ';
-  
+    $defaults['comment_field'] = '<p><textarea name="comment" id="comment" cols="30" rows="10"> </textarea></p> ';
+  	
+
 	return $defaults;
 }
 
@@ -278,8 +282,6 @@ require_once('functions/exray-theme-stylesheet.php');
 /* Register/ Create Theme Option Page*/
 /***************************************************************/
 require_once ('functions/exray-theme-options.php');
-
-
 
 ?>
 
