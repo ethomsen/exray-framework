@@ -22,6 +22,13 @@ function register_exray_menus() {
 
 add_action( 'init', 'register_exray_menus' );
 
+/*	Default custom menu fallback	*/
+function exray_default_menu_fallback(){
+    echo '<ul>';
+       wp_list_pages( array('depth' => 3,'title_li' => '') ); 
+    echo '</ul>';
+} 
+
 /***************************************************************/
 /* Load Javascript file*/
 /***************************************************************/
@@ -180,13 +187,16 @@ function exray_comments($comment, $args, $depth) {
 
 		<li id="comment-<?php comment_ID(); ?>">
 
-			<article <?php comment_class('clearfix'); ?>>
+			<article <?php comment_class('comment-content clearfix'); ?>>
 
 				<header>
 					<h5><?php comment_author_link(); ?></h5>
 					<p>
 						<span>on <?php comment_date();?> at <?php comment_time(); ?> - </span>
 						<?php comment_reply_link(array_merge($args, array('depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
+						<?php if( current_user_can('edit_comment') ) { 
+							echo '- '; edit_comment_link(__('Edit comment', 'exray-framework'), '', ''); 
+						} ?>
 					</p>
 
 				</header>
@@ -282,6 +292,7 @@ require_once('functions/exray-theme-stylesheet.php');
 /* Register/ Create Theme Option Page*/
 /***************************************************************/
 require_once ('functions/exray-theme-options.php');
+
 
 ?>
 

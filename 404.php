@@ -24,10 +24,14 @@
 							
 								<div class="entry-content">	
 
-									<p><?php _e('Oops! It seems what you are looking are missing, Use Search box below to find other relevant content.', 'exray-framework'); ?></p>
+									<p><?php _e('Oops! It seems what you are looking are missing, You can search more to find other relevant contents.', 'exray-framework'); ?></p>
 
 									<div class="search-form-404">
 										<?php get_search_form(); ?>
+										
+										<?php the_widget('WP_Widget_Categories', 'dropdown=1&count=1'); ?>
+										<br>
+										<?php the_widget( 'WP_Widget_Tag_Cloud'); ?>  
 									</div>
 									
 								</div>

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html <?php language_attributes(); ?> >
 <head>
@@ -29,7 +28,8 @@
 </head>
 <body <?php body_class() ?> >
 
-	<?php $options = get_option( 'exray_custom_settings' );?>
+<?php $options = get_option( 'exray_custom_settings' ); ?>
+
 	<!--[if lte IE 8 ]>
 	<noscript>
 		<strong>JavaScript is required for this website to be displayed correctly. Please enable JavaScript before continuing...</strong>
@@ -47,7 +47,15 @@
 									
 					<nav class="top-menu-navigation clearfix" role="navigation">
 
-						<?php wp_nav_menu( array( 'theme_location' => 'top-menu', 'container' => 'false' ) ); ?>
+					<?php 
+						wp_nav_menu( array( 
+							'theme_location' => 'top-menu', 
+							'container' => false, 
+							'container_class' => false,
+							'menu_class' => false,
+							'fallback_cb' => 'exray_default_menu_fallback'
+						) ); 
+					?>
 
 					</nav>
 					
@@ -106,8 +114,17 @@
 				<div class="container">
 
 					<nav class="main-menu-navigation clearfix" role="navigation">
-
-						<?php wp_nav_menu( array( 'theme_location' => 'main-menu', 'container' => 'false' ) ); ?>
+						
+					<?php 
+						wp_nav_menu( array( 
+							'theme_location' => 'main-menu', 
+							'container' => false, 
+							'container_class' => false,
+							'menu_class' => false,
+							'fallback_cb' => 'exray_default_menu_fallback'
+						) ); 
+				
+					?>
 
 					</nav>
                     

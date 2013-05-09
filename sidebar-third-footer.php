@@ -3,7 +3,7 @@
 
 	<div class="span3">
 		<aside class="footer-widget" role="complementary">
-			<?php _e('No widget found, please add widget here from Dashboard', 'exray-framework'); ?>
+			<?php the_widget('WP_Widget_Recent_Posts'); ?>  
 		</aside>
 	</div>
 

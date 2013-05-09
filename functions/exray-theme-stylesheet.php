@@ -19,8 +19,8 @@ function exray_theme_custom_css(){
 
 function exray_theme_customize_css(){
 	$options = get_option( 'exray_custom_settings' );
-	$top_menu_brightness = get_brightness($options['top_menu_color']);
-	$main_menu_brightness = get_brightness($options['main_menu_color']);	
+	$top_menu_brightness = get_brightness(isset( $options['top_menu_color'] ) ? $options['top_menu_color']  : 'f5f5f5' )  ;
+	$main_menu_brightness = get_brightness(isset( $options['main_menu_color'] ) ? $options['main_menu_color'] : 'f5f5f5' );	
 
 	if(!empty($options) ) :
 ?>	
@@ -75,7 +75,7 @@ function exray_theme_customize_css(){
 			background: <?php echo $options['main_menu_color']; ?>;
 		}
 		
-		 .main-menu-container .main-menu-navigation ul>li a:hover{
+		 .main-menu-container .main-menu-navigation ul>li a:hover, .main-menu-container .current_page_item{
 			<?php if($main_menu_brightness == true): ?>
 				background: <?php echo colourCreator($options['main_menu_color'], -10); ?> ;
 			<?php else: ?>

@@ -16,37 +16,37 @@
 						
 						<header>
 							
-								<h1 class="entry-title"><?php the_title(); ?></h1>
-								<div class="entry-meta">								
-									<p class="article-meta-extra">
-										<span class="icon left-meta-icon">P</span>
-										<a href="<?php the_permalink(); ?>" title="<?php echo get_the_time(); ?>" rel="bookmark">
-											<time datetime="<?php echo get_the_date('c'); ?>" pubdate><?php echo get_the_date() ?></time>
-										</a> , <?php _e('by','exray-framework'); ?>
-										
-										<?php the_author_posts_link(); ?>	
+							<h1 class="entry-title"><?php the_title(); ?></h1>
+							<div class="entry-meta">								
+								<p class="article-meta-extra">
+									<span class="icon left-meta-icon">P</span>
+									<a href="<?php the_permalink(); ?>" title="<?php echo get_the_time(); ?>" rel="bookmark">
+										<time datetime="<?php echo get_the_date('c'); ?>" pubdate><?php echo get_the_date() ?></time>
+									</a> , <?php _e('by','exray-framework'); ?>
+									
+									<?php the_author_posts_link(); ?>	
 
-										<ul class="categories">
-						                        <li><span class="icon categories">K</span></li>
-						                        <?php the_category(',&nbsp;'); ?>
-						                </ul>
+									<ul class="categories">
+					                        <li><span class="icon categories">K</span></li>
+					                        <?php the_category(',&nbsp;'); ?>
+					                </ul>
 
-						                 <?php 
+					                 <?php 
 
-						                 	if(comments_open() && !post_password_required()){
-						                 		echo "<span class='icon comment'>c</span> ";
-						                 		comments_popup_link('No comment', '1 comment', '% comments','article-meta-comment');
-						                 	}
+					                 	if(comments_open() && !post_password_required()){
+					                 		echo "<span class='icon comment'>c</span> ";
+					                 		comments_popup_link('No comment', '1 comment', '% comments','article-meta-comment');
+					                 	}
 
-						                 	if(current_user_can('edit_post', $post->ID)){
-						                 		edit_post_link(__('Edit', 'exray-framework'), '&nbsp;<p><span class="icon">S</span>&nbsp;', '</p>', '');
-						                 	}
-						                 ?>
-										
-									</p>
-								</div> 
-								<!-- End entry-meta -->
-							</header>
+					                 	if(current_user_can('edit_post', $post->ID)){
+					                 		edit_post_link(__('Edit', 'exray-framework'), '&nbsp;<p><span class="icon">S</span>&nbsp;', '</p>', '');
+					                 	}
+					                 ?>
+									
+								</p>
+							</div> 
+							<!-- End entry-meta -->
+						</header>
 
 						<div class="entry-content">	
 
@@ -99,15 +99,19 @@
 						</article> 	
 						<!-- End article -->
 						<div class="article-author clearfix">
-								<figure class="clearfix">
-									<?php echo get_avatar(get_the_author_meta('email'), '64', get_the_author_meta('display_name')); ?> 
-								</figure>
-								
-								<div class="author-detail clearfix">
-									<h5>Posted by <?php the_author_posts_link(); ?></h5>
-									 <?php the_author_meta('description'); ?>
-								</div> 
+
+							<figure class="clearfix">
+								<?php echo get_avatar(get_the_author_meta('email'), '64', get_the_author_meta('display_name')); ?> 
+							</figure>
+							
+							<div class="author-detail clearfix">
+								<h5>Posted by <?php the_author_posts_link(); ?></h5>
+								 <?php the_author_meta('description'); ?>
+							</div> 
+					
 						</div>
+						<!-- End article-author -->
+
 					<?php endwhile; else : ?>
 					<!-- If no post found -->
 					<article>
@@ -116,7 +120,16 @@
 
 					<?php endif ?>
 
-						<!-- End article-author -->
+				
+
+					<nav class="pagination clearfix"  id="nav-below" role="navigation">
+
+							<p class="article-nav-prev"><?php previous_post_link( '%link', '<span class="meta-nav">' . _x( '&larr;', 'Previous post link', 'exray-framework' ) . '</span> %title' ); ?></p>
+	    					<p class="article-nav-next"><?php next_post_link( '%link', '%title <span class="meta-nav">' . _x( '&rarr;', 'Next post link', 'exray-framework' ) . '</span>' ); ?></p>
+	
+					</nav>	
+					<!-- End nav-below -->	
+						
 						<div class="comment-area" id="comments">
 							
 							<?php comments_template('', true); ?>

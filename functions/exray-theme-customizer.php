@@ -86,7 +86,7 @@ function exray_customize_register($wp_customize){
 	/* Add setting for Ad link.*/
 
 	$wp_customize->add_setting('exray_custom_settings[top_ad_link]', array(
-			'default' => 'http://google.com',
+			'default' => home_url() ,
 			'type' => 'option'
 	));
 
