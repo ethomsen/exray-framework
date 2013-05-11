@@ -91,6 +91,6 @@ class Exray_Ad_260_Widget extends WP_Widget{
     }
 }
 
-register_widget('Exray_Ad_260_Widget');
+add_action( 'widgets_init', create_function( '', 'register_widget("Exray_Ad_260_Widget");' ) );
 
 ?>
