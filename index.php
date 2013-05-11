@@ -21,7 +21,7 @@
 							<?php endif; ?>
 
 						<nav class="pagination clearfix"  id="nav-below" role="navigation">
-
+							
 							<p class="article-nav-prev"><?php next_posts_link(__('&larr; Older Post', 'exray-framework')); ?></p>
 	    					<p class="article-nav-next"><?php previous_posts_link(__('Newer Post &rarr; ', 'exray-framework')); ?></p>
 	
