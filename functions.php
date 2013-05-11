@@ -3,7 +3,7 @@
 /* Define Constant */
 /***************************************************************/
 define( 'HOME_URI', home_url() );
-define( 'THEME_URI', get_stylesheet_directory_uri() );
+define( 'THEME_URI', get_template_directory_uri() );
 define( 'THEME_IMAGES', THEME_URI . '/images' );
 define( 'THEME_CSS', THEME_URI . '/css' );
 define( 'THEME_JS', THEME_URI . '/js' );
@@ -32,11 +32,11 @@ function exray_default_menu_fallback(){
 /***************************************************************/
 /* Load Javascript file*/
 /***************************************************************/
-function load_custom_scripts(){
+function exray_load_custom_scripts(){
 	wp_enqueue_script( 'custom_scripts', THEME_JS . '/scripts.js',  array('jquery'), false, true);
 }
 
-add_action( 'wp_enqueue_scripts', 'load_custom_scripts');
+add_action( 'wp_enqueue_scripts', 'exray_load_custom_scripts');
 
 
 /***************************************************************/
