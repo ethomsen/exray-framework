@@ -139,6 +139,9 @@ table caption {
 tr:nth-of-type(odd) {
   background: #fafafa;
 }
+tr:nth-of-type(even) {
+  background: #ededed;
+}
 th,
 th a {
   background: #c4c4c4;
@@ -285,11 +288,15 @@ img.centered {
 #header-wrap .logo-container {
   padding-left: 1.5em;
 }
-#header-wrap .logo-container .site-title {
+#header-wrap .logo-container .site-title,
+#header-wrap .logo-container .site-title a {
+  color: #333333;
   display: inline-block;
-  font-size: 2em;
-  line-height: 1.5em;
+  font-size: 28px;
+  line-height: 42px;
   margin-top: 0;
+  font-family: "OswaldBook", arial, serif;
+  margin-bottom: 0;
 }
 #header-wrap .logo-container .site-description {
   display: block;

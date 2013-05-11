@@ -181,8 +181,12 @@ table caption {
 }
 
 /* Zebra striping */
-	tr:nth-of-type(odd) { 
-	  background: @bevel-color; 
+	tr:nth-of-type(odd) {
+		background: @bevel-color;
+	}
+
+	tr:nth-of-type(even) {
+		background: darken(@bevel-color, 5%);
 	}
 
 	th, th a { 
@@ -353,11 +357,14 @@ img.centered {
 	.logo-container{
 		padding-left: 1.5em;
 
-	.site-title{
+	.site-title, .site-title a{
+		color: #333333;
 		display: inline-block;
-		font-size: 2em;
-		line-height: 1.5em;
+		font-size: 28px;
+		line-height: 42px;
 		margin-top: 0;
+		font-family: "OswaldBook", arial, serif;
+		margin-bottom: 0;
 	}
 	
 	.site-description{
