@@ -1,15 +1,17 @@
 <?php
-
+/* Hook to WordPress*/
 add_action( 'wp_head', 'exray_theme_customize_css' );
 add_action( 'wp_head', 'exray_theme_custom_css' );
 
+/*	Hook custom css value from Theme Options to wp_head  */
 function exray_theme_custom_css(){
-	$options = get_option('exray_custom_css');
-	if(!empty($options) ) :
+	$custom_css_options = get_option('exray_custom_css');
+
+	if(!empty( $custom_css_options ) ) :
 ?>
 	<style type="text/css">
 		
-		<?php echo $options; ?>
+		<?php echo esc_textarea( $custom_css_options ) ; ?>
 
 	</style>
 
@@ -17,111 +19,126 @@ function exray_theme_custom_css(){
 	endif;
 }
 
+/*	Hook css value from Theme Customizer to wp_head */
 function exray_theme_customize_css(){
-	$options = get_option( 'exray_custom_settings' );
-	$top_menu_brightness = get_brightness(isset( $options['top_menu_color'] ) ? $options['top_menu_color']  : 'f5f5f5' )  ;
-	$main_menu_brightness = get_brightness(isset( $options['main_menu_color'] ) ? $options['main_menu_color'] : 'f5f5f5' );	
+	// Color local variable
+	$customizer_options = get_option( 'exray_custom_settings' );
+	$top_menu_color = isset( $customizer_options['top_menu_color'] ) ? $customizer_options['top_menu_color'] : '';
+	$main_menu_color = isset( $customizer_options['main_menu_color'] ) ? $customizer_options['main_menu_color'] : '';
+	$link_color = isset ( $customizer_options['link_color'] ) ? $customizer_options['link_color'] : '';
+	$header_color = isset( $customizer_options['header_color'] ) ? $customizer_options['header_color'] : '';
+	$bg_color = isset( $customizer_options['bg_color'] ) ? $customizer_options['bg_color'] : '';
+	$footer_color = isset( $customizer_options['footer_color']  ) ? $customizer_options['footer_color'] : '';
+	$copyright_container_color = isset( $customizer_options['copyright_container_color'] ) ? $customizer_options['copyright_container_color'] : '';
 
-	if(!empty($options) ) :
+	// Check brightness
+	$top_menu_brightness = get_brightness( $top_menu_color );
+	$main_menu_brightness = get_brightness( $main_menu_color );	
+
+	if(!empty($customizer_options) ) :
 ?>	
 	 <style type="text/css">
 	 
 		/*Link*/
 		a, p a, h5 a { 
-			color: <?php echo $options['link_color']; ?>; 
+			color: <?php echo ( $link_color ); ?>; 
 		}
 
 		/*Top Navigation*/
 		.top-menu-container, .top-menu-container .top-menu-navigation ul>li ul li{
-			background: <?php echo $options['top_menu_color'];  ?>;
+			background: <?php echo $top_menu_color;  ?>;
 		}
 		
 
 		.top-menu-container .top-menu-navigation ul>li ul{
+			/* 	Check if input color light or dark color, if it's light color, return darker color of input color 	*/
+
 			<?php if($top_menu_brightness == true): ?>
-				border: 1px solid <?php echo colourCreator($options['top_menu_color'], -10); ?> ;
+				border: 1px solid <?php echo colourCreator($top_menu_color, -10); ?> ;
 			<?php else: ?>
-				border: 1px solid <?php echo colourCreator($options['top_menu_color'], 10) ;?> ;
+				border: 1px solid <?php echo colourCreator($top_menu_color, 10) ;?> ;
 			<?php endif; ?>
 		}
 
 			.top-menu-container .top-menu-navigation ul>li ul li{
 				<?php if($top_menu_brightness == true): ?>
-					border-bottom: 1px solid <?php echo colourCreator($options['top_menu_color'], -10); ?> ;
+					border-bottom: 1px solid <?php echo colourCreator($top_menu_color, -10); ?> ;
 				<?php else: ?>
-					border-bottom: 1px solid <?php echo colourCreator($options['top_menu_color'], 10) ;?> ;
+					border-bottom: 1px solid <?php echo colourCreator($top_menu_color, 10) ;?> ;
 				<?php endif; ?>
 			}	
 
 				.top-menu-container .top-menu-navigation ul>li ul li a:hover{
 					<?php if($top_menu_brightness == true): ?>
-						background: <?php echo colourCreator($options['top_menu_color'], -10); ?> ;
+						background: <?php echo colourCreator($top_menu_color, -10); ?> ;
 					<?php else: ?>
-						background: <?php echo colourCreator($options['top_menu_color'], 10) ;?> ;
+						background: <?php echo colourCreator($top_menu_color, 10) ;?> ;
 					<?php endif; ?>
 				}
 
 		.top-menu-container .top-menu-navigation ul > li a, .top-menu-container .top-menu-navigation ul > li a::before, .adaptive-top-nav li a{
-			color: <?php echo getContrastYIQ($options['top_menu_color']);?> ;
+			/*	Create contrast color from menu backround color	*/
+
+			color: <?php echo getContrastYIQ($top_menu_color);?> ;
 		}
 		
 		.header-container {
-			background:  <?php echo $options['header_color']; ?>;
+			background:  <?php echo $header_color; ?>;
 		}
 		
 
 		/*Main Navigation */
 		.main-menu-container,  .main-menu-container .main-menu-navigation ul>li ul li{
-			background: <?php echo $options['main_menu_color']; ?>;
+			background: <?php echo $main_menu_color; ?>;
 		}
 		
 		 .main-menu-container .main-menu-navigation ul>li a:hover, .main-menu-container .current_page_item{
 			<?php if($main_menu_brightness == true): ?>
-				background: <?php echo colourCreator($options['main_menu_color'], -10); ?> ;
+				background: <?php echo colourCreator($main_menu_color, -10); ?> ;
 			<?php else: ?>
-				background: <?php echo colourCreator($options['main_menu_color'], 10) ;?> ;
+				background: <?php echo colourCreator($main_menu_color, 10) ;?> ;
 			<?php endif; ?>
 		 }	
 
 		.main-menu-container .main-menu-navigation ul>li ul{
 			<?php if($main_menu_brightness == true): ?>
-				border: 1px solid <?php echo colourCreator($options['main_menu_color'], -10); ?> ;
+				border: 1px solid <?php echo colourCreator($main_menu_color, -10); ?> ;
 			<?php else: ?>
-				border: 1px solid <?php echo colourCreator($options['main_menu_color'], 10) ;?> ;
+				border: 1px solid <?php echo colourCreator($main_menu_color, 10) ;?> ;
 			<?php endif; ?>
 		}
 
 			.main-menu-container .main-menu-navigation ul>li ul li{
 				<?php if($main_menu_brightness == true): ?>
-					border-bottom: 1px solid <?php echo colourCreator($options['main_menu_color'], -10); ?> ;
+					border-bottom: 1px solid <?php echo colourCreator($main_menu_color, -10); ?> ;
 				<?php else: ?>
-					border-bottom: 1px solid <?php echo colourCreator($options['main_menu_color'], 10) ;?> ;
+					border-bottom: 1px solid <?php echo colourCreator($main_menu_color, 10) ;?> ;
 				<?php endif; ?>
 			}	
 
 				.main-menu-container .main-menu-navigation ul>li ul li a:hover{
 					<?php if($main_menu_brightness == true): ?>
-						background: <?php echo colourCreator($options['main_menu_color'], -10); ?> ;
+						background: <?php echo colourCreator($main_menu_color, -10); ?> ;
 					<?php else: ?>
-						background: <?php echo colourCreator($options['main_menu_color'], 10) ;?> ;
+						background: <?php echo colourCreator($main_menu_color, 10) ;?> ;
 					<?php endif; ?>
 				}
 
 		.main-menu-container  .main-menu-navigation ul > li a, .adaptive-main-nav li a {
-			color: <?php echo getContrastYIQ($options['main_menu_color']); ?> ;
+			color: <?php echo getContrastYIQ($main_menu_color); ?> ;
 		}
 
-		/*Background color*/
+		/*isset( r*/
 		.wrap{
-			background: <?php echo $options['bg_color']; ?> ; 
+			background: <?php echo $bg_color; ?> ; 
 		}
 
 		.footer-widget-area{
-			background: <?php echo $options['footer_color']; ?>;
+			background: <?php echo $footer_color; ?>;
 		}
 
 		.copyright-container{
-			background: <?php echo $options['copyright_container_color']; ?>;
+			background: <?php echo $copyright_container_color ; ?>;
 		}	
 	   
 	 </style>
@@ -129,22 +146,21 @@ function exray_theme_customize_css(){
 	endif;
 }
 
-// Contrast color For link color on menu
+// Create Contrast color For link color on menu
 function getContrastYIQ($hexcolor){
 
+	//take care # from color hex value
 	$hexcolor= ltrim ($hexcolor,'#');
 	$r = hexdec(substr($hexcolor,0,2));
 	$g = hexdec(substr($hexcolor,2,2));
 	$b = hexdec(substr($hexcolor,4,2));
-
-	//take care # from color hex value
 
 	$yiq = (($r*299)+($g*587)+($b*114))/1000;
 
 	return ($yiq >= 128) ? '#333333' : '#fafafa';
 }
 
-// Check if color is dark or light color
+// Check if color is dark or light 
 function get_brightness($hexcolor){
 	// strip off any leading #
 	$hexcolor = str_replace('#', '', $hexcolor);
@@ -159,7 +175,7 @@ function get_brightness($hexcolor){
 		 $result = true;	//bright color
 	}
 	else{
-		 $result = false; //dark color	
+		 $result = false; 	//dark color	
 	}
 	
 	return $result;
