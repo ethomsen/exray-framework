@@ -17,11 +17,6 @@
 
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
-	<!-- Favicon and Apple Icons -->
-	<link rel="shortcut icon" type="image/x-icon" href="<?php print THEME_IMAGES; ?>/icons/favicon.ico" />
-	<link rel="apple-touch-icon" type="image/x-icon" href="<?php print THEME_IMAGES; ?>/icons/apple-touch-icon.png" />
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="<?php print THEME_IMAGES; ?>/icons/apple-touch-icon-72x72.png" />
-	<link rel="apple-touch-icon" type="image/x-icon" sizes="114x114" href="<?php print THEME_IMAGES; ?>/icons/apple-touch-icon-114x114.png" />
 	<!-- Script required for extra functionality on the comment form -->
 	<?php if (is_singular()) wp_enqueue_script( 'comment-reply' ); ?>
 	<?php wp_head(); ?>
@@ -72,19 +67,45 @@
 					<div class="span6 logo-container"> 
 	
 						<?php if($options['display_logo'] != 0) : ?>
-						<!-- Display logo Image -->
-						<h1 class="logo"> 
-							<a href="<?php echo home_url(); ?>">
-								<img src="<?php echo $options['exray_theme_logo']; ?>" alt="<?php bloginfo('name')?> | <?php bloginfo('description')?>" />
-							</a>
-						</h1>
 
-						<?php else: ?>		
-						<!-- Display text logo and tagline	 -->
-						<hgroup>
-							<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-							<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
-						</hgroup>
+							<?php if(is_home()) : ?>
+
+								<!-- Display logo Image -->
+								<h1 class="logo"> 
+									<a href="<?php echo home_url(); ?>">
+										<img src="<?php echo $options['exray_theme_logo']; ?>" alt="<?php bloginfo('name')?> | <?php bloginfo('description')?>" />
+									</a>
+								</h1>
+
+							<?php else: ?>
+
+								<p class="logo"> 
+									<a href="<?php echo home_url(); ?>">
+										<img src="<?php echo $options['exray_theme_logo']; ?>" alt="<?php bloginfo('name')?> | <?php bloginfo('description')?>" />
+									</a>
+								</p>
+
+							<?php endif; ?>
+
+						<?php else: ?>	
+
+							<?php if(is_home()) : ?>
+
+								<!-- Display text logo and tagline	 -->
+								<hgroup>
+									<h1 class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
+									<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
+								</hgroup>
+
+							<?php else: ?>
+								
+								<!-- Display text logo and tagline	 -->
+								<hgroup>
+									<p class="site-title"><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
+									<p class="site-description"><?php bloginfo( 'description' ); ?></p>
+								</hgroup>
+
+							<?php endif; ?>
 									
 						<?php endif; ?>					
 						
