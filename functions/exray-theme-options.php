@@ -6,12 +6,15 @@ add_action( 'admin_init', 'exray_theme_custom_css_init');
 add_action( 'wp_head', 'exray_theme_add_to_head');
 add_action( 'wp_footer', 'exray_theme_add_to_footer');
 
+/* Global Variable */
+$exray_general_options = get_option('exray_theme_general_options');
+
+/* Register and create Theme option page under Appearance */
 function exray_theme_options(){
-	//Create Theme option page under Appearance
-	add_theme_page( 'Exray Theme Options', 'Theme Options', 'administrator', 'exray_theme_options', 'exray_theme_page');
-	add_theme_page('Customize', 'Customize', 'edit_theme_options', 'customize.php');
+	add_theme_page( 'Exray Theme Options', 'Theme Options', 'edit_theme_options', 'exray_theme_options', 'exray_theme_page');
 }
 
+/* Render Theme Option page */
 function exray_theme_page($active_tab= ''){
 	// The default message that will appear if Custom CSS form empty
     $custom_css_default = __( '/*
@@ -50,7 +53,6 @@ Please add all your custom CSS here and avoid modifying the core theme files, si
 
 		 	<?php 
 		 		if($active_tab == 'general_options'){
-		 			// echo 'You can add analytics and other scripts below. If you are looking to modify visual appearances, please go to <a href="customize.php">Theme Customize</a>';
 		 			settings_fields( 'exray_theme_general_options_group' );
 		 			do_settings_sections( 'exray_theme_general_options_page' );
 		 		}
@@ -59,8 +61,9 @@ Please add all your custom CSS here and avoid modifying the core theme files, si
 
 		 		?>
 		 			<h3><?php _e('Custom CSS', 'exray-framework'); ?></h3>
-					<p><?php _e('Add your custom CSS below', 'exray-framework'); ?></p>
-					<textarea id="custom_css_textarea" name="exray_custom_css" style="height:300px;" placeholder="<?php echo _e('/*** Add your custom CSS below. Do not edit style.css directly. ***/', 'exray-framework'); ?>"><?php echo $options; ?></textarea>
+					<p><?php _e('Add your custom CSS below. For your information, Custom css below will override colors from', 'exray-framework'); ?> <a href="<?php echo admin_url('customize.php'); ?>" title="Theme Customizer">Theme Customizer</a></p>
+
+					<textarea id="custom_css_textarea" name="exray_custom_css" style="height:300px;" placeholder="<?php echo _e('/*** Add your custom CSS here. Do not edit style.css directly. ***/', 'exray-framework'); ?>"><?php echo esc_textarea( $options ); ?></textarea>
 				<?php
 
 				}
@@ -80,16 +83,18 @@ Please add all your custom CSS here and avoid modifying the core theme files, si
 <?php
 }
 
+// Initialize general option page setting section, field and settings
 function exray_theme_general_options_init(){
+	global $exray_general_options;
 
-	if(false == get_option('exray_theme_general_options') ){
+	if(false == $exray_general_options ){
 		add_option('exray_theme_general_options', apply_filters( 'exray_theme_default_general_options', exray_theme_default_general_options() ) );
 	}
 
 	add_settings_section( 
 		'exray_theme_general_options_section', 
 		'General Options', 
-		'', 
+		'exray_theme_general_options_section_callback', 
 		'exray_theme_general_options_page' 
 	);
 
@@ -120,11 +125,13 @@ function exray_theme_general_options_init(){
 
 	register_setting( 
 		'exray_theme_general_options_group', 
-		'exray_theme_general_options'
+		'exray_theme_general_options',
+		'exray_theme_validate_general_options'
 	);
 
 }
 
+// Initialize Custom settings
 function exray_theme_custom_css_init(){
 
 	register_setting( 
@@ -134,48 +141,64 @@ function exray_theme_custom_css_init(){
 	);
 }
 
+/* Theme Option settings callback */
+function exray_theme_general_options_section_callback(){
+	_e('You can modify Theme backend feature here. Looking to modify Theme Frontend / Visual style? Please check', 'exray-framework');
+?>
+	<a href="<?php echo admin_url('customize.php'); ?>" title="Theme Customizer">Theme Customizer</a>.
+<?php
+}
+
 function contact_form_email_receiver_callback(){
-	$options = get_option( 'exray_theme_general_options');
+	global $exray_general_options;
 	$email = '';
 
-	if( isset($options['contact_form_email_receiver'] ) ){
-		$email = $options['contact_form_email_receiver'];
+	if( isset($exray_general_options['contact_form_email_receiver'] ) && is_email( $exray_general_options['contact_form_email_receiver'] ) ){
+		$email = $exray_general_options['contact_form_email_receiver'];
 	}
 
-	echo '<input type="text" name="exray_theme_general_options[contact_form_email_receiver]" id="contact_form_email_receiver" value="'. $email .'" style="width:300px;"/>';
+	echo '<input type="text" name="exray_theme_general_options[contact_form_email_receiver]" id="contact_form_email_receiver" value="'. esc_attr( $email ) .'" style="width:300px;"/>';
 	
 }
 
 function add_to_head_callback(){
-	$options = get_option( 'exray_theme_general_options' );
+	global $exray_general_options;
+	$default =  exray_theme_default_general_options();
+	$option_to_head = $exray_general_options['add_to_head'];
 
-	echo '<textarea name="exray_theme_general_options[add_to_head]" id="add_to_head" cols="30" rows="10">'.$options['add_to_head'].'</textarea>';
+	$content_to_head = ( $option_to_head ? esc_textarea( $option_to_head ) : $default['add_to_head'] );
+
+	echo '<textarea name="exray_theme_general_options[add_to_head]" id="add_to_head" cols="30" rows="10">'. $content_to_head .'</textarea>';
 }
 
 function add_to_footer_callback(){
-	$options = get_option( 'exray_theme_general_options' );
+	global $exray_general_options;
+	$default =  exray_theme_default_general_options();
+	$option_to_head = $exray_general_options['add_to_footer'];
 
-	echo '<textarea name="exray_theme_general_options[add_to_footer]" id="add_to_footer" cols="30" rows="10">'.$options['add_to_footer'].'</textarea>';
+	$content_to_footer = ( $option_to_head ? esc_textarea( $option_to_head ) : $default['add_to_footer'] );
+
+	echo '<textarea name="exray_theme_general_options[add_to_footer]" id="add_to_footer" cols="30" rows="10">'. $content_to_footer .'</textarea>';
 }
 
-
+/* Hook option to wp_head and wp_footer	*/
 function exray_theme_add_to_head(){
-	$options = get_option( 'exray_theme_general_options' );
-
-	echo $options['add_to_head'];
+	global $exray_general_options;
+	
+	echo $exray_general_options['add_to_head'];
 }
 
 function exray_theme_add_to_footer(){
-	$options = get_option( 'exray_theme_general_options' );
+	global $exray_general_options;
 
-	echo $options['add_to_footer'];
+	echo $exray_general_options['add_to_footer'];
 }
 
 /* Default values for General Options. */
 function exray_theme_default_general_options() {
 	
 	$defaults = array(
-		'contact_form_email_receiver' =>  get_option('admin_email'),
+		'contact_form_email_receiver' => '',
 		'add_to_head' => '',
 		'add_to_footer' => ''
 	);
@@ -183,6 +206,28 @@ function exray_theme_default_general_options() {
 	return apply_filters( 'exray_theme_default_general_options', $defaults );	
 }
 
+/* Validate all fields on general options page */
+function exray_theme_validate_general_options($input){
+	$valid = array();
+	$valid['contact_form_email_receiver'] = sanitize_email( $input['contact_form_email_receiver'] );
+	$valid['add_to_head']  = $input['add_to_head'] ; 
+	$valid['add_to_footer']  = $input['add_to_footer'] ;
+
+	if($valid['contact_form_email_receiver'] != $input['contact_form_email_receiver'] ){
+
+		add_settings_error(
+	        'contact_form_email_receiver',           
+	        'contact_form_email_receiver_error',          
+	        __('Invalid email, please fix', 'exray-framework'),  	
+	        'error'                       
+        );     
+
+	}
+
+	return $valid;
+}
+
+/* Validate Custom CSS Page */
 function exray_theme_display_validation( $input ) {
     if ( ! empty( $input['exray_custom_css'] ) )
        $input['exray_custom_css'] = trim($input['exray_custom_css'] );
