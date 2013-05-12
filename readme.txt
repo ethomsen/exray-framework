@@ -1,113 +1,102 @@
 === Exray ===
 Contributors: Septian Ahmad Fujianto
-Tags: gray, white, one-column, flexible-width, custom-menu, flexible-header, full-width-template, post-formats, sticky-post, theme-options, translation-ready
-Requires at least: 3.5.1
+Tags: gray, white, one-column, three-columns, flexible-width, custom-menu, flexible-header, full-width-template, post-formats, sticky-post, theme-options, threaded-comments, translation-ready
+Requires at least: 3.5
 Tested up to: 3.5.1
 Stable tag: 1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Adaptive mobile friendly WordPress Theme coded with HTML5 and CSS3 in mind.
+Description: A simple, clean and responsive theme build with HTML5 and Twitter Bootstrap. Designed to be starting point for your Website with unlimited possibility for customization, with Theme Customizer and Theme Options ready, you won't get any trouble modifying most part of the theme. By using flat design concept, your content will standout and catch your reader eyes.      
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
-
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
-
-A few notes about the sections above:
-
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
-
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+A simple, clean and responsive theme build with HTML5 and Twitter Bootstrap. 
+Designed to be starting point for your Website with unlimited possibility for customization, with Theme Customizer and Theme Options ready, you won't get any trouble modifying most part of the theme.
+Some part of theme have auto color adjusment, it will adjust colors by calculating your input color and generate contrast color to make your content easier to read.You can always use Custom css on Theme Option if you willing to dirty your hands and don't like auto adjusted colors.
+Using flat design concept, your content will standout catch your reader eyes.  
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+Manual installation:
 
-e.g.
+1. Upload the `exray` folder to the `/wp-content/themes/` directory
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+Installation using "Add New Theme"
+
+1. From your Admin UI (Dashboard), use the menu to select Themes -> Add New
+2. Search for 'exray'
+3. Click the 'Install' button to open the theme's repository listing
+4. Click the 'Install' button
+
+Activiation and Use
+
+1. Activate the Theme through the 'Themes' menu in WordPress
+2. See Appearance -> Theme Options to change theme specific options
+3. See Appearance -> Themes -> Under description of current theme choose Customize to customize theme visual design.
+
+== License ==
+
+Unless otherwise specified, all the theme files, scripts and images
+are licensed under GNU General Public Licemse version 2, see file license.txt.
+The exceptions to this license are as follows:
+* The script fitvids.js is licensed under WTFPL
+* Web symbols font is licensed under SIL Open Font License 1.1
+* Oswald font is licensed under SIL Open Font License 1.1
+
+== Theme Notes ==
+
+=== Theme Options ===
+
+Modify backend functionality from theme options. On general options tab, you can change contact form email receiver and add custom scripts to head or footer of Theme. If you are looking for more customization for theme look and feel, you can put your custom css on Custom css tab textarea,
+
+=== Theme Customizer ===
+
+Most of theme functionality and design can be customized from theme customizer. See appearance -> Themes -> Under description of current theme choose Customize, in order to access it. In theme customizer, you can upload your website logo, top ad banner and change your theme colors.  
+
+=== Post Thumbnail Functionality ===
+
+Post Thumbnails appear only in post lists, not on single posts.
+You can easily set it by choosing "Set as Featured Image" when uploading an image or edit your post to add it.
+
+=== Post Formats ===
+
+Posts with the aside, status & quote post formats will displayed with no title;
+the quote post format will only display the post's first <blockquote> tag.
+Posts with the link post format will link out to the first <a> tag in the post.
+
+=== Widgets Areas ===
+
+You can easily add widget on 6 customizable widgetized area, consisting left and right sidebar, fist, second, third and fourth footer.  
+
+=== Custom Widget ===
+
+The theme has custom widget for showing simple ad banner. You can easily add your own banner by using 260x120 Ad widget and place it in sidebar or any other widgetized area.
+
+=== Contact Form ===
+
+You can easily create your own contact form with built in contact form page. Go to pages -> Add new -> On Page Attributes, choose Contact Page on Template options. To change contact form email receiver, go to Appearance -> Theme Options -> fill your desired contact form email receiver.
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Why custom css not working? =
 
-An answer to that question.
+You probably made mistake on your custom css code. For example, when trying to change main menu color, usually you will use this css code, 
+.main-menu-container a{ color: red; } , It's now working, because the coreect way to do it is, .main-menu-container .main-menu-navigation ul li a{ color: red; }. Please check theme css / html class structure to make sure your custom css working properly.
 
-= What about foo bar? =
+= How do I add thumbnails to posts? =
 
-Answer to foo bar dilemma.
+When editing a post, open the upload tool, select the image you wish to set as thumbnail
+and select "Use as Featured Image". Note that thumbnails appear only in blog post lists.
+To display then in single posts you need to insert them manually.
 
 == Screenshots ==
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets 
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png` 
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+1. Standard Theme Screenshot
 
 == Changelog ==
 
 = 1.0 =
-* A change since the previous version.
-* Another change.
+* Initial Release.
 
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
 
-== Upgrade Notice ==
-
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](http://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: http://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
