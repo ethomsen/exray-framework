@@ -46,13 +46,32 @@
 	</header>
 
 	<?php if(has_post_thumbnail()) : ?>
+	
 	<aside class="post_image">
 		<figure class="article-preview-image">
 
-			<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
+			<a href="<?php the_permalink(); ?>">
+			
+			<?php 
 
+				$post_thumbnail = wp_get_attachment_thumb_url( get_post_thumbnail_id( $post->ID ) );
+				$thumb_id = get_post_thumbnail_id( $post->ID );
+
+				/* Check if the_post_thumbnail() != '' */
+				if($post_thumbnail){
+					the_post_thumbnail();
+				}
+				/* Get the first image if post thumbnail fail to retrieve image */
+				else{
+					echo '<img src="'. catch_that_image() .'" alt="'. get_post_meta($thumb_id, '_wp_attachment_image_alt', true) .'" />';
+				}
+				
+			?>
+			</a>
+		
 		</figure>		
 	</aside>
+		
 	<?php endif ?> 
 	<!-- End post_image -->
 
