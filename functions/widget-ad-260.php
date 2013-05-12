@@ -81,7 +81,7 @@ class Exray_Ad_260_Widget extends WP_Widget{
 
        if($ad_img): ?>
             <li>
-            <figure><a href="<?php echo $ad_link; ?>"><img src="<?php echo $ad_img; ?>" alt="" /></a></figure>
+            <figure><a href="<?php echo $ad_link; ?>"><img src="<?php echo $ad_img; ?>" alt="banner ad" /></a></figure>
            </li>
 
        <?php endif;

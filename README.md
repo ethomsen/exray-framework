@@ -48,7 +48,7 @@ The exceptions to this license are as follows:
 
 === Theme Options ===
 
-Modify backend functionality from theme options. On general options tab, you can change contact form email receiver and add custom scripts to head or footer of Theme. If you are looking for more customization for theme look and feel, you can put your custom css on Custom css tab textarea,
+Modify backend functionality from theme options. On general options tab, you can change contact form email receiver and add custom scripts to head or footer of Theme. If you are looking for more customization for theme look and feel, you can put your custom css on Custom css tab textarea.
 
 === Theme Customizer ===
 
@@ -62,8 +62,8 @@ You can easily set it by choosing "Set as Featured Image" when uploading an imag
 === Post Formats ===
 
 Posts with the aside, status & quote post formats will displayed with no title;
-the quote post format will only display the post's first blockquote tag.
-Posts with the link post format will link out to the first a tag in the post.
+the quote post format will only display the post's first <blockquote> tag.
+Posts with the link post format will link out to the first <a> tag in the post.
 
 === Widgets Areas ===
 
@@ -89,6 +89,10 @@ You probably made mistake on your custom css code. For example, when trying to c
 When editing a post, open the upload tool, select the image you wish to set as thumbnail
 and select "Use as Featured Image". Note that thumbnails appear only in blog post lists.
 To display then in single posts you need to insert them manually.
+
+= How do I contact you? =
+
+You can shoot me email at septianahmad[at]naisinpo[dot]com.
 
 == Screenshots ==
 

@@ -166,7 +166,7 @@ function exray_customize_register($wp_customize){
 	// Footer area color
 	$exray_theme_customizer_colors[] = array(
 		'settings' => 'exray_custom_settings[footer_color]',
-		'default' => 'f2f2f2',
+		'default' => 'f7f7f7',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Footer Color', 'exray-framework'),
