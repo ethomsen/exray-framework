@@ -307,7 +307,4 @@ require_once('functions/exray-theme-stylesheet.php');
 /***************************************************************/
 require_once ('functions/exray-theme-options.php');
 
-
 ?>
-
-
