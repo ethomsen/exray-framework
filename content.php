@@ -63,7 +63,7 @@
 				}
 				/* Get the first image if post thumbnail fail to retrieve image */
 				else{
-					echo '<img src="'. catch_that_image() .'" alt="featured image" />';
+					echo '<img src="'. catch_that_image() .'" alt="'. get_post_meta($thumb_id, '_wp_attachment_image_alt', true) .'" />';
 				}
 				
 			?>

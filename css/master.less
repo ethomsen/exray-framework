@@ -182,15 +182,15 @@ table caption {
 
 /* Zebra striping */
 	tr:nth-of-type(odd) {
-		background: lighten(@bevel-color,10%);
+		background: @bevel-color;
 	}
 
 	tr:nth-of-type(even) {
-		background: darken(@bevel-color, 2%);
+		background: darken(@bevel-color, 5%);
 	}
 
 	th, th a { 
-	  background: darken(@dark-gray,45%);
+	  background: darken(@dark-gray,10%);
 	  color: lighten(@bevel-color, 10%);
 	  font-weight: bold; 
 	}
@@ -522,7 +522,7 @@ img.centered {
 		    font-size: 12px;
 		    line-height: 1em;
 		    margin: 0 2px 0 8px;
-		    color:lighten(@dark-color,25%);    
+		    color:darken(@dark-gray,5%);    
 		}
 
 		.categories, .tags{
@@ -1032,13 +1032,13 @@ img.centered {
 }
 
 .menus{
-	background: @link-color url(../images/icons/menu.png) .8em center no-repeat;
+	background: lighten(@link-color,10%) url(../images/icons/menu.png) .8em center no-repeat;
 	height: 3em;
 	padding: 0 1em 1em 3em;
 	line-height: 3em;
 	
 	&:hover{
-		background: lighten(@link-color,10%) url(../images/icons/menu.png) .8em center no-repeat;
+		background: lighten(@link-color,20%) url(../images/icons/menu.png) .8em center no-repeat;
 		color: @base-color;
 		text-decoration: none;
 	}
@@ -1088,7 +1088,7 @@ form{
 		width: 100%;
 		
 		&:hover, &:focus{
-			border-color: darken(@border-color,15%);
+			border-color: darken(@border-color,10%);
 		}
 	}
 	
@@ -1096,10 +1096,6 @@ form{
 		border:  1px solid @dark-gray;
 		padding: .5em;
 		width: 100%;
-
-		&:hover, &:focus{
-			border-color: darken(@border-color,15%);
-		}
 	}
 	
 	input[type="submit"]{
@@ -1177,7 +1173,7 @@ input[type="password"]{
 
 /*	Footer 	*/
 .footer-widget-area{
-	background: darken(@bevel-color,1%);
+	background: darken(@bevel-color,3%);
 	border-top: 1px solid @dark-gray;
 	
 	padding: 3em 0;
@@ -1223,10 +1219,6 @@ input[type="password"]{
 	padding-top: 1.5em;
 	font-size: 12px; 
 	
-	a{
-		color: darken(@link-color, 10%);
-	}
-
 	.top-link-footer{
 		float: right;
 	}
@@ -1315,19 +1307,13 @@ input[type="password"]{
 /* Tablet Portrait size to standard 960 (devices and browsers) */
 @media only screen and (min-width: 768px) and (max-width: 959px) {
 
-	.top-menu-navigation, .main-menu-navigation{  //.main-sidebar,
+	 .top-menu-navigation, .main-menu-navigation{  //.main-sidebar,
 		display: none;
 	}
 
 	#adaptive-top-nav-btn, #adaptive-main-nav-btn{
 		display: inline-block;
 		margin-bottom:  1em 0;
-	}
-	
-	.main-menu-container .current_page_item, .top-menu-container .current_page_item{
-		font-weight: bold;
-		padding: .5em;
-		background: darken(@menu-color, 10%);
 	}
 
 	#main{
@@ -1357,15 +1343,10 @@ input[type="password"]{
 		display: none;
 	}
 
+
 	#adaptive-top-nav-btn, #adaptive-main-nav-btn{
 		display: inline-block;
 		margin-bottom:  1em 0;
-	}
-	
-	.main-menu-container .current_page_item, .top-menu-container .current_page_item{
-		font-weight: bold;
-		padding: .5em;
-		background: darken(@menu-color, 10%);
 	}
 
 	.container{
@@ -1408,13 +1389,7 @@ input[type="password"]{
 			max-width: 100%;
 		}
 	}
-	
-	.main-menu-container .current_page_item, .top-menu-container .current_page_item{
-		font-weight: bold;
-		padding: .5em;
-		background: darken(@menu-color, 10%);
-	}
-	
+
 	.content {
 		.article-author{
 			figure{
@@ -1457,12 +1432,6 @@ input[type="password"]{
 
 /* Mobile Portrait Size to Mobile Landscape Size (devices and browsers) */
 @media only screen and (max-width: 479px) {
-	.main-menu-container .current_page_item, .top-menu-container .current_page_item{
-		font-weight: bold;
-		padding: .5em;
-		background: darken(@menu-color, 10%);
-	}
-
    .content{
    		article{
    			header{
