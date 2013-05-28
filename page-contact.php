@@ -13,7 +13,6 @@ $error_captcha = false;
 // Get a key from https://www.google.com/recaptcha/admin/create
 $publickey = $exray_general_options['recaptcha_public_key'];
 $privatekey =$exray_general_options['recaptcha_private_key'];
-
 # the response from reCAPTCHA
 $resp = null;
 # the error code from reCAPTCHA, if any
@@ -51,18 +50,20 @@ if(isset($_POST['contact-submit'])){
         $message =  esc_textarea( stripslashes( trim($_POST['contact-message'])) );
     }
 
-    # was there a reCAPTCHA response?
-	if ( isset($_POST["recaptcha_response_field"]) ) {
-	    $resp = recaptcha_check_answer (
-	    	$privatekey,
-	        $_SERVER["REMOTE_ADDR"],
-	        $_POST["recaptcha_challenge_field"],
-	        $_POST["recaptcha_response_field"]
-	    );
+    if(!empty($publickey) && !empty($privatekey) ){
+	    # was there a reCAPTCHA response?
+		if ( isset($_POST["recaptcha_response_field"]) ) {
+		    $resp = recaptcha_check_answer (
+		    	$privatekey,
+		        $_SERVER["REMOTE_ADDR"],
+		        $_POST["recaptcha_challenge_field"],
+		        $_POST["recaptcha_response_field"]
+		    );
 
-	    if (!$resp->is_valid) {
-	        $error_captcha = true;
-	    }
+		    if (!$resp->is_valid) {
+		        $error_captcha = true;
+		    }
+		}
 	}
 
     //Check if errors occures
@@ -153,8 +154,10 @@ if(isset($_POST['contact-submit'])){
                                 <textarea name="contact-message" id="contact-message" cols="30" rows="10"><?php if(isset ($_POST['contact-message'])) echo stripslashes( $_POST['contact-message']);  ?> </textarea>
 							</p>
 							<p <?php if( $error_captcha ) echo 'class="p-errors"'; ?> >
-								<label for="contact-captcha"><?php _e('Are you human? Please solve captcha below to prove it.', 'exray-framework'); ?></label>
-								<?php echo recaptcha_get_html($publickey, $error); ?>
+								<?php if(!empty($publickey) && !empty($privatekey) ) : ?>
+									<label for="contact-captcha"><?php _e('Are you human? Please solve captcha below to prove it.', 'exray-framework'); ?></label>
+									<?php echo recaptcha_get_html($publickey, $error); ?>
+								<?php endif; ?>
 							</p>
 
 							<input type="hidden" name="contact-submit" id="contact-submit" value="true"/>
