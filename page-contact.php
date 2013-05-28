@@ -2,10 +2,22 @@
 /*
     Template Name: Contact Page
 */
+require_once('functions/recaptchalib.php');
 
+global $exray_general_options; 
 $error_name = false;
 $error_email = false;
 $error_message = false;
+$error_captcha = false;
+
+// Get a key from https://www.google.com/recaptcha/admin/create
+$publickey = $exray_general_options['recaptcha_public_key'];
+$privatekey =$exray_general_options['recaptcha_private_key'];
+
+# the response from reCAPTCHA
+$resp = null;
+# the error code from reCAPTCHA, if any
+$error = null;
 
 if(isset($_POST['contact-submit'])){
     //Initalize variable for Form FIeld
@@ -39,8 +51,22 @@ if(isset($_POST['contact-submit'])){
         $message =  esc_textarea( stripslashes( trim($_POST['contact-message'])) );
     }
 
+    # was there a reCAPTCHA response?
+	if ( isset($_POST["recaptcha_response_field"]) ) {
+	    $resp = recaptcha_check_answer (
+	    	$privatekey,
+	        $_SERVER["REMOTE_ADDR"],
+	        $_POST["recaptcha_challenge_field"],
+	        $_POST["recaptcha_response_field"]
+	    );
+
+	    if (!$resp->is_valid) {
+	        $error_captcha = true;
+	    }
+	}
+
     //Check if errors occures
-    if(!$error_name && !$error_email && !$error_message){
+    if(!$error_name && !$error_email && !$error_message && !$error_captcha){
         //Get the received email
         $options = get_option('exray_theme_general_options');
         $receiver_email = ( $options['contact_form_email_receiver'] == '' ? get_option( 'admin_email' ) : $options['contact_form_email_receiver'] );
@@ -78,6 +104,8 @@ if(isset($_POST['contact-submit'])){
 	<div class="row">
 
 		<div class="span6 article-container-adaptive" id="main">
+
+			<?php Exray::load_breadcrumb(); ?>
 			
 			<div class="content" role="main">
 				
@@ -86,19 +114,8 @@ if(isset($_POST['contact-submit'])){
 					
 					<header>
 						
-							<h1 class="entry-title"><?php the_title(); ?></h1>
-							<div class="entry-meta">								
-								<p class="article-meta-extra">										
-					                 <?php
-                                       if(current_user_can('edit_post', $post->ID)){
-					                 		edit_post_link(__('Edit', 'exray-framework'), '<p><span class="icon left-meta-icon">S</span>&nbsp;', '</p>', '');
-					                 	}
-
-					                 ?>
-									
-								</p>
-							</div> 
-							<!-- End entry-meta -->
+						<h1 class="entry-title"><?php the_title(); ?></h1>
+						<?php get_entry_meta('half'); ?>
 					</header>
 
                     <?php if(isset ($email_sent) && $email_sent == true) : ?>
@@ -115,21 +132,6 @@ if(isset($_POST['contact-submit'])){
                     <?php else: ?>
 
                         	<div class="entry-content">
-						<!-- Experimental -->
-						<?php if(has_post_thumbnail()) : ?>
-
-							<aside class="post_image">
-								<figure class="article-preview-image">
-
-									<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail(); ?></a>
-
-								</figure>
-							</aside>
-
-						<?php else: ?>
-							<!-- <hr class="content-separator"> -->
-						<?php endif ?>
-						<!-- End post_image Experimental -->
 
 						<?php the_content(); ?>
 
@@ -150,31 +152,16 @@ if(isset($_POST['contact-submit'])){
 								<label for="contact-message"><?php _e('Message', 'exray-framework'); ?></label>
                                 <textarea name="contact-message" id="contact-message" cols="30" rows="10"><?php if(isset ($_POST['contact-message'])) echo stripslashes( $_POST['contact-message']);  ?> </textarea>
 							</p>
+							<p <?php if( $error_captcha ) echo 'class="p-errors"'; ?> >
+								<label for="contact-captcha"><?php _e('Are you human? Please solve captcha below to prove it.', 'exray-framework'); ?></label>
+								<?php echo recaptcha_get_html($publickey, $error); ?>
+							</p>
 
 							<input type="hidden" name="contact-submit" id="contact-submit" value="true"/>
 							<p><input type="submit" value="Send Message"/></p>
 						</form>
 
 					</div>
-
-                        <?php if(has_tag()) : ?>
-
-                            <footer class="entry-meta cb" id="tag-container" role="contentinfo">
-
-                                <ul class="tags">
-                                    <li><span class="icon tags">,</span></li>
-                                    <?php the_tags() ?>
-
-                                </ul>
-
-                            </footer>
-
-                        <?php else: ?>
-
-                            <hr class="content-separator">
-
-                        <?php endif; ?>
-                        <!-- end meta (category & tag) -->
 
                     <?php endif; ?>
                     <!--  End Email -->
@@ -190,8 +177,6 @@ if(isset($_POST['contact-submit'])){
 				</article>
 
 				<?php endif ?>
-
-					<!-- End article-author -->
 	
 			</div> 
 			<!-- end content -->
