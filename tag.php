@@ -10,11 +10,11 @@
 					<div class="content" role="main">
 						<?php if(have_posts()) : ?>
 
-								<div class="top-content">
-									
-									<h5><?php single_tag_title(  __('More from: ', 'exray-framework'), true ); ?></h5>
-									<hr class="content-separator">
-								</div> 
+							<div class="top-content">
+								
+								<h5><?php single_tag_title(  __('More from: ', 'exray-framework'), true ); ?></h5>
+								<hr class="content-separator">
+							</div> 
 
 							<?php while(have_posts()) : the_post(); ?>			
 								<!-- The Loop of Post -->
@@ -28,12 +28,9 @@
 
 							<?php endif; ?>
 
-						<nav class="pagination clearfix"  id="nav-below" role="navigation">
-
-							<p class="article-nav-prev"><?php next_posts_link(__('&larr; Older Post', 'exray-framework')); ?></p>
-	    					<p class="article-nav-next"><?php previous_posts_link(__('Newer Post &rarr; ', 'exray-framework')); ?></p>
-				
-						</nav>	
+						<!-- Pagination for older/newer post -->
+							<?php get_pagination(); ?>
+								
 						<!-- End nav-below -->	
 					</div> 
 					<!-- end content -->

@@ -11,7 +11,9 @@
 			<div class="row">
 			
 				<div class="span12 article-container-adaptive">
-					
+
+					<?php Exray::load_breadcrumb(); ?>
+
 					<div class="content" role="main">
 							
 						<?php if(have_posts()) : while(have_posts()) : the_post(); ?>				
@@ -19,19 +21,9 @@
 							
 							<header>
 								
-									<h1 class="entry-title"><?php the_title(); ?></h1>
-									<div class="entry-meta">								
-										<p class="article-meta-extra">										
-							                 <?php
-                                               if(current_user_can('edit_post', $post->ID)){
-							                 		edit_post_link(__('Edit', 'exray-framework'), '<p><span class="icon left-meta-icon">S</span>&nbsp;', '</p>', '');
-							                 	}
+								<h1 class="entry-title"><?php the_title(); ?></h1>
+								<?php get_entry_meta('half'); ?>
 
-							                 ?>
-											
-										</p>
-									</div> 
-									<!-- End entry-meta -->
 							</header>
 
 							<div class="entry-content">	
@@ -53,36 +45,9 @@
 
 								<?php the_content(); ?>
 							</div>
-															  
-							<?php if(has_tag()) : ?>
-
-								<footer class="entry-meta cb" id="tag-container" role="contentinfo">
-
-				                    <ul class="tags">
-				                        <li><span class="icon tags">,</span></li>
-				                        <?php the_tags() ?> 
-
-			                        </ul>
-
-								</footer> 
-
-							<?php else: ?>
-
-								<hr class="content-separator">	
-
-							<?php endif; ?>
-							<!-- end meta (category & tag) -->	
 							
-							<div class="post-pagination">
-								<!-- Pagination For Multipaged Post -->
-								<?php $args = array(
-									'before'=>'<p class="post-pagination">Page',
-									'after'=>'</p>',
-									'pagelink'=>'%'  
-								);?>
-
-								<?php wp_link_pages($args); ?>
-							</div>
+							<!-- Pagination For Multipaged Post -->							  	
+							<?php get_post_pagination(); ?>
 											
 							</article> 	
 							<!-- End article -->
