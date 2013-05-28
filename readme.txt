@@ -3,7 +3,7 @@ Contributors: Septian Ahmad Fujianto
 Tags: gray, white, one-column, three-columns, flexible-width, custom-menu, flexible-header, full-width-template, post-formats, sticky-post, theme-options, threaded-comments, translation-ready
 Requires at least: 3.5
 Tested up to: 3.5.1
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -48,7 +48,7 @@ The exceptions to this license are as follows:
 
 === Theme Options ===
 
-Modify backend functionality from theme options. On general options tab, you can change contact form email receiver and add custom scripts to head or footer of Theme. If you are looking for more customization for theme look and feel, you can put your custom css on Custom css tab textarea.
+Modify backend functionality from theme options. On general options tab, you can change contact form email receiver and add custom scripts to head or footer of Theme. For spam prevention measures, reCaptcha public and private key will be required. Please get your reCaptcha key for your website at http://www.google.com/recaptcha/whyrecaptcha. If you are looking for more customization for theme look and feel, you can put your custom css on Custom css tab textarea.
 
 === Theme Customizer ===
 
@@ -99,6 +99,11 @@ You can shoot me email at septianahmad[at]naisinpo[dot]com.
 1. Standard Theme Screenshot
 
 == Changelog ==
+
+= 1.1 =
+* Add reCaptcha widget on contact form for spam prevention.
+* Major code refactor.
+* CSS bug fix.
 
 = 1.0 =
 * Initial Release.

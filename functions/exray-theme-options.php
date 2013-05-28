@@ -184,9 +184,10 @@ function recaptcha_public_key_callback(){
 	if( isset($exray_general_options['recaptcha_public_key'] ) ){
 		$recaptcha_public_key = $exray_general_options['recaptcha_public_key'];
 	}
-
+	
 	echo '<input type="text" name="exray_theme_general_options[recaptcha_public_key]" id="recaptcha_public_key" value="'. esc_attr( $recaptcha_public_key ) .'" style="width:300px;"/>';
-	_e('&nbsp; Add your reCaptcha Public and Private key to activate reCaptcha. <a href="http://www.google.com/recaptcha">GET reCAPTCHA</a>', 'exray-framework');
+	_e('&nbsp; Add your reCaptcha Public and Private key to activate reCaptcha.', 'exray-framework');
+	echo popuplinks('<a href="http://www.google.com/recaptcha">GET reCAPTCHA</a>.');
 }
 
 function recaptcha_private_key_callback(){
