@@ -106,17 +106,7 @@ function exray_customize_register($wp_customize){
 	// Top Navigation color
 	$exray_theme_customizer_colors[] = array(
 		'settings' => 'exray_custom_settings[top_menu_color]',
-		'default' => 'f5f5f5',
-		'sanitize_callback' => 'sanitize_hex_color',
-		'type' => 'option',
-		'label' =>__('Top Menu Color', 'exray-framework'),
-		'section' => 'colors'
-	);
-
-	// Top Navigation color
-	$exray_theme_customizer_colors[] = array(
-		'settings' => 'exray_custom_settings[top_menu_color]',
-		'default' => 'f5f5f5',
+		'default' => '#f5f5f5',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Top Menu Color', 'exray-framework'),
@@ -126,7 +116,7 @@ function exray_customize_register($wp_customize){
 	// Link color
 	$exray_theme_customizer_colors[] = array(
 		'settings' => 'exray_custom_settings[link_color]',
-		'default' => '0d72c7',
+		'default' => '#0d72c7',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Link Color', 'exray-framework'),
@@ -136,7 +126,7 @@ function exray_customize_register($wp_customize){
 	// Header color
 	$exray_theme_customizer_colors[] = array(
 		'settings' => 'exray_custom_settings[header_color]',
-		'default' => 'ffffff',
+		'default' => '#ffffff',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Header Color', 'exray-framework'),
@@ -146,7 +136,7 @@ function exray_customize_register($wp_customize){
 	// Main Navigation color
 	$exray_theme_customizer_colors[] = array(
 		'settings' => 'exray_custom_settings[main_menu_color]',
-		'default' => 'f5f5f5',
+		'default' => '#f5f5f5',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Main Menu Color', 'exray-framework'),
@@ -156,7 +146,7 @@ function exray_customize_register($wp_customize){
 	// Background color
 	$exray_theme_customizer_colors[] = array(
 		'settings' => 'exray_custom_settings[bg_color]',
-		'default' => 'ffffff',
+		'default' => '#ffffff',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Background Color', 'exray-framework'),
@@ -166,7 +156,7 @@ function exray_customize_register($wp_customize){
 	// Footer area color
 	$exray_theme_customizer_colors[] = array(
 		'settings' => 'exray_custom_settings[footer_color]',
-		'default' => 'f2f2f2',
+		'default' => '#f7f7f7',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Footer Color', 'exray-framework'),
@@ -176,7 +166,7 @@ function exray_customize_register($wp_customize){
 	// Copyright area color
 	$exray_theme_customizer_colors[] = array(
 		'settings' => 'exray_custom_settings[copyright_container_color]',
-		'default' => 'ededed',
+		'default' => '#ededed',
 		'sanitize_callback' => 'sanitize_hex_color',
 		'type' => 'option',
 		'label' =>__('Bottom container Color', 'exray-framework'),
