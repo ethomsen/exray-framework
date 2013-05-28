@@ -3,7 +3,7 @@
 add_action( 'wp_head', 'exray_theme_customize_css' );
 add_action( 'wp_head', 'exray_theme_custom_css' );
 
-/*	Hook custom css value from Theme Options to wp_head  */
+/*	Hook custom css value from Theme Options custom css to wp_head  */
 function exray_theme_custom_css(){
 	$custom_css_options = get_option('exray_custom_css');
 
@@ -23,13 +23,13 @@ function exray_theme_custom_css(){
 function exray_theme_customize_css(){ 
 	// Color local variable
 	$customizer_options = get_option( 'exray_custom_settings' ); 
-	$top_menu_color = isset( $customizer_options['top_menu_color'] ) ? $customizer_options['top_menu_color'] : '#f5f5f5';
-	$main_menu_color = isset( $customizer_options['main_menu_color'] ) ? $customizer_options['main_menu_color'] : '#f5f5f5';
-	$link_color = isset ( $customizer_options['link_color'] ) ? $customizer_options['link_color'] : '#0d72c7';
-	$header_color = isset( $customizer_options['header_color'] ) ? $customizer_options['header_color'] : '#ffffff';
-	$bg_color = isset( $customizer_options['bg_color'] ) ? $customizer_options['bg_color'] : '#ffffff';
-	$footer_color = isset( $customizer_options['footer_color']  ) ? $customizer_options['footer_color'] : '#f7f7f7';
-	$copyright_container_color = isset( $customizer_options['copyright_container_color'] ) ? $customizer_options['copyright_container_color'] : '#ededed';
+	$top_menu_color = Exray::validate_var($customizer_options['top_menu_color'] , '#f5f5f5');
+	$main_menu_color = Exray::validate_var($customizer_options['main_menu_color'] , '#f5f5f5');
+	$link_color = Exray::validate_var($customizer_options['link_color'],  '#0d72c7');
+	$header_color = Exray::validate_var( $customizer_options['header_color'], '#ffffff'); 
+	$bg_color = Exray::validate_var($customizer_options['bg_color'], '#ffffff');
+	$footer_color = Exray::validate_var($customizer_options['footer_color'], '#f7f7f7'); 
+	$copyright_container_color = Exray::validate_var($customizer_options['copyright_container_color'] , '#ededed'); 
 
 	// Check brightness
 	$top_menu_brightness = get_brightness( $top_menu_color );
@@ -40,106 +40,68 @@ function exray_theme_customize_css(){
 	 <style type="text/css">
 	 
 		/*Link*/
-		a, p a, h5 a { 
-			color: <?php echo ( $link_color ); ?>; 
-		}
+		a, p a, h5 a { color: <?php echo ( $link_color ); ?>; }
 
 		/*Top Navigation*/
-		.top-menu-container, .top-menu-container .top-menu-navigation ul>li ul li{
-			background: <?php echo $top_menu_color;  ?>;
-		}
+		.top-menu-container, .top-menu-container .top-menu-navigation ul>li ul li{ background: <?php echo $top_menu_color;  ?>; }
 		
+<?php 
+// Check if top menu background color light or dark color, if it's light color, return lighter color, vice versa. 
+if($top_menu_brightness == true){
+	$darker_color = colourCreator($top_menu_color, -10);
+	$css = <<<CSS
+		.top-menu-container .top-menu-navigation ul>li ul{ border: 1px solid $darker_color; }
+		.top-menu-container .top-menu-navigation ul>li ul li{ border-bottom: 1px solid $darker_color; }
+		.top-menu-container .top-menu-navigation ul>li ul li a:hover{ background: $darker_color; }
+CSS;
+	echo $css;
+}
 
-		.top-menu-container .top-menu-navigation ul>li ul{
-			/* 	Check if input color light or dark color, if it's light color, return darker color of input color 	*/
-
-			<?php if($top_menu_brightness == true): ?>
-				border: 1px solid <?php echo colourCreator($top_menu_color, -10); ?> ;
-			<?php else: ?>
-				border: 1px solid <?php echo colourCreator($top_menu_color, 10) ;?> ;
-			<?php endif; ?>
-		}
-
-			.top-menu-container .top-menu-navigation ul>li ul li{
-				<?php if($top_menu_brightness == true): ?>
-					border-bottom: 1px solid <?php echo colourCreator($top_menu_color, -10); ?> ;
-				<?php else: ?>
-					border-bottom: 1px solid <?php echo colourCreator($top_menu_color, 10) ;?> ;
-				<?php endif; ?>
-			}	
-
-				.top-menu-container .top-menu-navigation ul>li ul li a:hover{
-					<?php if($top_menu_brightness == true): ?>
-						background: <?php echo colourCreator($top_menu_color, -10); ?> ;
-					<?php else: ?>
-						background: <?php echo colourCreator($top_menu_color, 10) ;?> ;
-					<?php endif; ?>
-				}
-
-		.top-menu-container .top-menu-navigation ul > li a, .top-menu-container .top-menu-navigation ul > li a::before, .adaptive-top-nav li a{
-			/*	Create contrast color from menu backround color	*/
-
-			color: <?php echo getContrastYIQ($top_menu_color);?> ;
-		}
+else{
+	$lighter_color = colourCreator($top_menu_color, 10);
+	$css = <<<CSS
+		.top-menu-container .top-menu-navigation ul>li ul{ border: 1px solid $lighter_color; }
+		.top-menu-container .top-menu-navigation ul>li ul li{ border-bottom: 1px solid $lighter_color; }
+		.top-menu-container .top-menu-navigation ul>li ul li a:hover{ background: $lighter_color; }
+CSS;
+	echo $css;
+}
+?>	/*	Create contrast color for link based on menu backround color	*/
+	.top-menu-container .top-menu-navigation ul > li a, .top-menu-container .top-menu-navigation ul > li a::before, .adaptive-top-nav li a{
+		color: <?php echo getContrastYIQ($top_menu_color);?> ;
+	}
+	.header-container { background:  <?php echo $header_color; ?>; }
+	
+	/*Main Navigation */
+	.main-menu-container,  .main-menu-container .main-menu-navigation ul>li ul li{ background: <?php echo $main_menu_color; ?>; }
 		
-		.header-container {
-			background:  <?php echo $header_color; ?>;
-		}
-		
+<?php 
+if($main_menu_brightness == true) {
+	$darker_color = colourCreator($main_menu_color, -10);
+	$css = <<<CSS
+		.main-menu-container .main-menu-navigation ul>li a:hover, .main-menu-container .current_page_item{ background: $darker_color; }
+		.main-menu-container .main-menu-navigation ul>li ul{ border: 1px solid  $darker_color; }
+		.main-menu-container .main-menu-navigation ul>li ul li{ border-bottom: 1px solid $darker_color; }
+		.main-menu-container .main-menu-navigation ul>li ul li a:hover{ background: $darker_color; }
+CSS;
+echo $css;
+}
+else {
+	$lighter_color = colourCreator($main_menu_color, 10);
+	$css = <<<CSS
+		.main-menu-container .main-menu-navigation ul>li a:hover, .main-menu-container .current_page_item{ background: $lighter_color; }	
+		.main-menu-container .main-menu-navigation ul>li ul{ border: 1px solid  $lighter_color; }
+		.main-menu-container .main-menu-navigation ul>li ul li{ border-bottom: 1px solid $lighter_color; }
+		.main-menu-container .main-menu-navigation ul>li ul li a:hover{ background: $lighter_color; }
+CSS;
+echo $css;
+}
 
-		/*Main Navigation */
-		.main-menu-container,  .main-menu-container .main-menu-navigation ul>li ul li{
-			background: <?php echo $main_menu_color; ?>;
-		}
-		
-		 .main-menu-container .main-menu-navigation ul>li a:hover, .main-menu-container .current_page_item{
-			<?php if($main_menu_brightness == true): ?>
-				background: <?php echo colourCreator($main_menu_color, -10); ?> ;
-			<?php else: ?>
-				background: <?php echo colourCreator($main_menu_color, 10) ;?> ;
-			<?php endif; ?>
-		 }	
-
-		.main-menu-container .main-menu-navigation ul>li ul{
-			<?php if($main_menu_brightness == true): ?>
-				border: 1px solid <?php echo colourCreator($main_menu_color, -10); ?> ;
-			<?php else: ?>
-				border: 1px solid <?php echo colourCreator($main_menu_color, 10) ;?> ;
-			<?php endif; ?>
-		}
-
-			.main-menu-container .main-menu-navigation ul>li ul li{
-				<?php if($main_menu_brightness == true): ?>
-					border-bottom: 1px solid <?php echo colourCreator($main_menu_color, -10); ?> ;
-				<?php else: ?>
-					border-bottom: 1px solid <?php echo colourCreator($main_menu_color, 10) ;?> ;
-				<?php endif; ?>
-			}	
-
-				.main-menu-container .main-menu-navigation ul>li ul li a:hover{
-					<?php if($main_menu_brightness == true): ?>
-						background: <?php echo colourCreator($main_menu_color, -10); ?> ;
-					<?php else: ?>
-						background: <?php echo colourCreator($main_menu_color, 10) ;?> ;
-					<?php endif; ?>
-				}
-
-		.main-menu-container  .main-menu-navigation ul > li a, .adaptive-main-nav li a {
-			color: <?php echo getContrastYIQ($main_menu_color); ?> ;
-		}
-
-		/*isset( r*/
-		.wrap{
-			background: <?php echo $bg_color; ?> ; 
-		}
-
-		.footer-widget-area{
-			background: <?php echo $footer_color; ?>;
-		}
-
-		.copyright-container{
-			background: <?php echo $copyright_container_color ; ?>;
-		}	
+?>	
+	.main-menu-container  .main-menu-navigation ul > li a, .adaptive-main-nav li a { color: <?php echo getContrastYIQ($main_menu_color); ?> ; }
+	.wrap{ background: <?php echo $bg_color; ?> ; }
+	.footer-widget-area{ background: <?php echo $footer_color; ?>; }
+	.copyright-container{ background: <?php echo $copyright_container_color ; ?>; }	
 	   
 	 </style>
 <?php
@@ -148,7 +110,6 @@ function exray_theme_customize_css(){
 
 // Create Contrast color For link color on menu
 function getContrastYIQ($hexcolor){
-
 	//take care # from color hex value
 	$hexcolor= ltrim ($hexcolor,'#');
 	$r = hexdec(substr($hexcolor,0,2));
