@@ -73,6 +73,10 @@ You can easily add widget on 6 customizable widgetized area, consisting left and
 
 The theme has custom widget for showing simple ad banner. You can easily add your own banner by using 260x120 Ad widget and place it in sidebar or any other widgetized area.
 
+=== Shortcode ===
+
+You can easily add link button and embed youtube video on post by using shortcode. To add link button, the shortcode is [button color="blue" to="http://google.com"]Google[/button] or [button color="gray" to="http://apple.com"]Apple[/button]. To embeed youtube video, use this shortcode [video_embed src="http://www.youtube.com/embed/2uKakdA_PU8"].
+
 === Contact Form ===
 
 You can easily create your own contact form with built in contact form page. Go to pages -> Add new -> On Page Attributes, choose Contact Page on Template options. To change contact form email receiver, go to Appearance -> Theme Options -> fill your desired contact form email receiver.
@@ -82,7 +86,7 @@ You can easily create your own contact form with built in contact form page. Go 
 = Why custom css not working? =
 
 You probably made mistake on your custom css code. For example, when trying to change main menu color, usually you will use this css code, 
-.main-menu-container a{ color: red; } , It's now working, because the coreect way to do it is, .main-menu-container .main-menu-navigation ul li a{ color: red; }. Please check theme css / html class structure to make sure your custom css working properly.
+.main-menu-container a{ color: red; } , It's not working, because the coreect way to do it is, .main-menu-container .main-menu-navigation ul li a{ color: red; }. Please check theme css / html class structure to make sure your custom css working properly.
 
 = How do I add thumbnails to posts? =
 
@@ -104,6 +108,7 @@ You can shoot me email at septianahmad[at]naisinpo[dot]com.
 * Add reCaptcha widget on contact form for spam prevention.
 * Major code refactor.
 * CSS bug fix.
+* Add shortcode support for link button and embed youtube video.
 
 = 1.0 =
 * Initial Release.
