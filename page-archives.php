@@ -12,6 +12,8 @@
 			
 				<div class="span6 article-container-adaptive" id="main">
 					
+					<?php Exray::load_breadcrumb(); ?>
+
 					<div class="content" role="main">
 										
 						<article class="post clearfix" id="post-1" role="article">
@@ -19,18 +21,8 @@
 							<header>
 								
 								<h1 class="entry-title"><?php the_title(); ?></h1>
-								<div class="entry-meta">								
-									<p class="article-meta-extra">										
-						                 <?php
-                                           if(current_user_can('edit_post', $post->ID)){
-						                 		edit_post_link(__('Edit', 'exray-framework'), '<p><span class="icon left-meta-icon">S</span>&nbsp;', '</p>', '');
-						                 	}
-
-						                 ?>
-										
-									</p>
-								</div> 
-								<!-- End entry-meta -->
+								<?php get_entry_meta('half'); ?>
+								
 							</header>
 
 							<div class="entry-content">	
@@ -46,26 +38,7 @@
                                     <?php wp_list_categories('title_li='); ?>
                                 </ul>
 
-							</div>
-														  
-							<?php if(has_tag()) : ?>
-
-								<footer class="entry-meta cb" id="tag-container" role="contentinfo">
-
-				                    <ul class="tags">
-				                        <li><span class="icon tags">,</span></li>
-				                        <?php the_tags() ?> 
-
-			                        </ul>
-
-								</footer> 
-
-							<?php else: ?>
-
-								<hr class="content-separator">	
-
-							<?php endif; ?>
-							<!-- end meta (category & tag) -->	
+							</div>									  
 		
 						</article> 	
 							<!-- End article -->
