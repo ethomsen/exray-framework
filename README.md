@@ -62,8 +62,8 @@ You can easily set it by choosing "Set as Featured Image" when uploading an imag
 === Post Formats ===
 
 Posts with the aside, status & quote post formats will displayed with no title;
-the quote post format will only display the post's first <blockquote> tag.
-Posts with the link post format will link out to the first <a> tag in the post.
+the quote post format will only display the post's first &lt;blockquote&gt; tag.
+Posts with the link post format will link out to the first &lt;a&gt; tag in the post.
 
 === Widgets Areas ===
 
