@@ -7,8 +7,14 @@ class Exray extends HTML{
 	public $symbol;
 	public $lang_dir, $domain;
 
-	public function __construct(){
-		
+	public function __construct(){ }
+
+	public static function validate_var($var, $default = ''){
+		if(isset($var) ){
+			return $var;
+		}
+
+		return $default;
 	}
 
 	/**
