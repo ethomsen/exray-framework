@@ -2,8 +2,6 @@
 /*
     Template Name: Contact Page
 */
-require_once('functions/recaptchalib.php');
-
 global $exray_general_options; 
 $error_name = false;
 $error_email = false;
