@@ -7,6 +7,8 @@
 			
 				<div class="span6 article-container-adaptive" id="main">
 					
+					<?php Exray::load_breadcrumb(); ?>
+
 					<div class="content" role="main">
 						<?php if(have_posts()) : ?>
 
@@ -27,13 +29,8 @@
 								<h1><?php _e("No post were Found", "exray-framework") ?></h1>
 
 							<?php endif; ?>
-
-						<nav class="pagination clearfix"  id="nav-below" role="navigation">
-
-							<p class="article-nav-prev"><?php next_posts_link(__('&larr; Older Post', 'exray-framework')); ?></p>
-	    					<p class="article-nav-next"><?php previous_posts_link(__('Newer Post &rarr; ', 'exray-framework')); ?></p>
-
-						</nav>	
+						<!-- Pagination for older/newer post -->
+						<?php get_pagination(); ?>	
 						<!-- End nav-below -->	
 					</div> 
 					<!-- end content -->
