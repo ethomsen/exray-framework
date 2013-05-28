@@ -1,5 +1,4 @@
 <?php get_header(); ?>
-
 <!-- Main Content -->
 		<div class="container" id="main-container">
 			
@@ -8,25 +7,27 @@
 				<div class="span6 article-container-adaptive" id="main">
 					
 					<div class="content" role="main">
-							<?php if(have_posts()) : while (have_posts()): the_post(); ?>		
-								<!-- The Loop of Post -->
-								
-								<?php get_template_part('content', get_post_format()); ?>
-								
-								<!-- If post format content, show post format content items -->
-								
-							<?php endwhile; else :  ?>
-								<!-- If no Post Found -->
-								<h1><?php _e("No post were Found", "exray-framework") ?></h1>
+						<!-- The Loop of Post -->
+						<?php if(have_posts()) : while (have_posts()): the_post(); ?>		
+							
+							<!-- If template part content exist, show post format content items -->
+							<?php get_template_part('content', get_post_format()); ?>				
+							
+						<?php endwhile; else :  ?>
+							<!-- If no Post Found -->
+							<h1><?php _e("No post were Found", "exray-framework") ?></h1>
 
-							<?php endif; ?>
-
+						<?php endif; ?>
+						
+						<!-- Pagination for older / newer post -->
 						<nav class="pagination clearfix"  id="nav-below" role="navigation">
 							
 							<p class="article-nav-prev"><?php next_posts_link(__('&larr; Older Post', 'exray-framework')); ?></p>
 	    					<p class="article-nav-next"><?php previous_posts_link(__('Newer Post &rarr; ', 'exray-framework')); ?></p>
 	
 						</nav>	
+						<!-- End nav-below -->
+
 						<!-- End nav-below -->	
 					</div> 
 					<!-- end content -->
