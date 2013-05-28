@@ -20,16 +20,16 @@ function exray_theme_custom_css(){
 }
 
 /*	Hook css value from Theme Customizer to wp_head */
-function exray_theme_customize_css(){
+function exray_theme_customize_css(){ 
 	// Color local variable
-	$customizer_options = get_option( 'exray_custom_settings' );
-	$top_menu_color = isset( $customizer_options['top_menu_color'] ) ? $customizer_options['top_menu_color'] : '';
-	$main_menu_color = isset( $customizer_options['main_menu_color'] ) ? $customizer_options['main_menu_color'] : '';
-	$link_color = isset ( $customizer_options['link_color'] ) ? $customizer_options['link_color'] : '';
-	$header_color = isset( $customizer_options['header_color'] ) ? $customizer_options['header_color'] : '';
-	$bg_color = isset( $customizer_options['bg_color'] ) ? $customizer_options['bg_color'] : '';
-	$footer_color = isset( $customizer_options['footer_color']  ) ? $customizer_options['footer_color'] : '';
-	$copyright_container_color = isset( $customizer_options['copyright_container_color'] ) ? $customizer_options['copyright_container_color'] : '';
+	$customizer_options = get_option( 'exray_custom_settings' ); 
+	$top_menu_color = isset( $customizer_options['top_menu_color'] ) ? $customizer_options['top_menu_color'] : '#f5f5f5';
+	$main_menu_color = isset( $customizer_options['main_menu_color'] ) ? $customizer_options['main_menu_color'] : '#f5f5f5';
+	$link_color = isset ( $customizer_options['link_color'] ) ? $customizer_options['link_color'] : '#0d72c7';
+	$header_color = isset( $customizer_options['header_color'] ) ? $customizer_options['header_color'] : '#ffffff';
+	$bg_color = isset( $customizer_options['bg_color'] ) ? $customizer_options['bg_color'] : '#ffffff';
+	$footer_color = isset( $customizer_options['footer_color']  ) ? $customizer_options['footer_color'] : '#f7f7f7';
+	$copyright_container_color = isset( $customizer_options['copyright_container_color'] ) ? $customizer_options['copyright_container_color'] : '#ededed';
 
 	// Check brightness
 	$top_menu_brightness = get_brightness( $top_menu_color );
