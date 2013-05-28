@@ -9,7 +9,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
 	
 	<!-- Stylesheets -->
-	<link rel="stylesheet" href="<?php bloginfo('stylesheet_url') ?>" media="all" /> 
+	<link rel="stylesheet" href="<?php echo get_stylesheet_uri(); ?>" media="all" /> 
 	
 	<!--[if lt IE 9]>a
 		<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -18,7 +18,8 @@
 	<link rel="pingback" href="<?php bloginfo('pingback_url'); ?>" />
 
 	<!-- Script required for extra functionality on the comment form -->
-	<?php if (is_singular()) wp_enqueue_script( 'comment-reply' ); ?>
+	<?php if (is_singular() && get_option( 'thread_comments' ) ) wp_enqueue_script( 'comment-reply' ); ?>
+
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class() ?> >
@@ -48,7 +49,7 @@
 							'container' => false, 
 							'container_class' => false,
 							'menu_class' => false,
-							'fallback_cb' => 'exray_default_menu_fallback'
+							'fallback_cb' => 'Exray::default_menu_fallback'
 						) ); 
 					?>
 
@@ -142,7 +143,7 @@
 							'container' => false, 
 							'container_class' => false,
 							'menu_class' => false,
-							'fallback_cb' => 'exray_default_menu_fallback'
+							'fallback_cb' => 'Exray::default_menu_fallback'
 						) ); 
 				
 					?>
