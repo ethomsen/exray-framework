@@ -107,6 +107,22 @@ function exray_theme_general_options_init(){
 	);
 
 	add_settings_field( 
+		'recaptcha_public_key', 
+		__('reCaptcha Public Key', 'exray-framework'), 
+		'recaptcha_public_key_callback', 
+		'exray_theme_general_options_page', 
+		'exray_theme_general_options_section'
+	);
+
+	add_settings_field( 
+		'recaptcha_private_key', 
+		__('reCaptcha Private Key', 'exray-framework'), 
+		'recaptcha_private_key_callback', 
+		'exray_theme_general_options_page', 
+		'exray_theme_general_options_section'
+	);
+
+	add_settings_field( 
 		'add_to_head', 
 		__('Add Scripts before &lt;/head&gt;', 'exray-framework'), 
 		'add_to_head_callback', 
@@ -161,6 +177,31 @@ function contact_form_email_receiver_callback(){
 	
 }
 
+function recaptcha_public_key_callback(){
+	global $exray_general_options;
+	$recaptcha_public_key = '';
+
+	if( isset($exray_general_options['recaptcha_public_key'] ) ){
+		$recaptcha_public_key = $exray_general_options['recaptcha_public_key'];
+	}
+
+	echo '<input type="text" name="exray_theme_general_options[recaptcha_public_key]" id="recaptcha_public_key" value="'. esc_attr( $recaptcha_public_key ) .'" style="width:300px;"/>';
+	_e('&nbsp; Add your reCaptcha Public and Private key to activate reCaptcha. <a href="http://www.google.com/recaptcha">GET reCAPTCHA</a>', 'exray-framework');
+}
+
+function recaptcha_private_key_callback(){
+	global $exray_general_options;
+	$recaptcha_private_key = '';
+
+	if( isset($exray_general_options['recaptcha_private_key'] ) ){
+		$recaptcha_private_key = $exray_general_options['recaptcha_private_key'];
+	}
+
+	echo '<input type="text" name="exray_theme_general_options[recaptcha_private_key]" id="recaptcha_private_key" value="'. esc_attr( $recaptcha_private_key ) .'" style="width:300px;"/>';
+	_e('&nbsp; Be sure to keep this private key secret.', 'exray-framework');
+}
+
+
 function add_to_head_callback(){
 	global $exray_general_options;
 	$default =  exray_theme_default_general_options();
@@ -200,7 +241,9 @@ function exray_theme_default_general_options() {
 	$defaults = array(
 		'contact_form_email_receiver' => '',
 		'add_to_head' => '',
-		'add_to_footer' => ''
+		'add_to_footer' => '',
+		'recaptcha_public_key' => '',
+		'recaptcha_private_key' => ''
 	);
 	
 	return apply_filters( 'exray_theme_default_general_options', $defaults );	
@@ -212,6 +255,9 @@ function exray_theme_validate_general_options($input){
 	$valid['contact_form_email_receiver'] = sanitize_email( $input['contact_form_email_receiver'] );
 	$valid['add_to_head']  = $input['add_to_head'] ; 
 	$valid['add_to_footer']  = $input['add_to_footer'] ;
+	$valid['recaptcha_public_key']  = $input['recaptcha_public_key'] ; 
+	$valid['recaptcha_private_key']  = $input['recaptcha_private_key'] ;
+
 
 	if($valid['contact_form_email_receiver'] != $input['contact_form_email_receiver'] ){
 
