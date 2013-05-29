@@ -6,9 +6,6 @@ add_action( 'admin_init', 'exray_theme_custom_css_init');
 add_action( 'wp_head', 'exray_theme_add_to_head');
 add_action( 'wp_footer', 'exray_theme_add_to_footer');
 
-/* Global Variable */
-$exray_general_options = get_option('exray_theme_general_options');
-
 /* Register and create Theme option page under Appearance */
 function exray_theme_options(){
 	add_theme_page( 'Exray Theme Options', 'Theme Options', 'edit_theme_options', 'exray_theme_options', 'exray_theme_page');
@@ -174,7 +171,7 @@ function contact_form_email_receiver_callback(){
 	}
 
 	echo '<input type="text" name="exray_theme_general_options[contact_form_email_receiver]" id="contact_form_email_receiver" value="'. esc_attr( $email ) .'" style="width:300px;"/>';
-	
+	_e('&nbsp; All email from contact form will be sent to this email address.', 'exray-framework');
 }
 
 function recaptcha_public_key_callback(){
