@@ -12,6 +12,7 @@ define( 'THEME_JS', THEME_URI . '/js' );
 /* Exray class */
 /***************************************************************/
 require 'classes/exray.php';
+require 'classes/contact.php';
 /***************************************************************/
 /* Theme template / parts */
 /***************************************************************/
@@ -22,6 +23,9 @@ require ('functions/exray-theme-stylesheet.php');
 require ('functions/exray-theme-options.php');
 require ('functions/exray-theme-shortcode.php');
 require_once('functions/recaptchalib.php');
+
+/* Global Variable */
+$exray_general_options = get_option('exray_theme_general_options');
 
 $exray->set_max_content_width(542);
 $exray->get_max_content_width();
