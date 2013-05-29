@@ -121,7 +121,7 @@ function getContrastYIQ($hexcolor){
 	return ($yiq >= 128) ? '#333333' : '#fafafa';
 }
 
-// Check if color is dark or light 
+// Check if color is dark or light color
 function get_brightness($hexcolor){
 	// strip off any leading #
 	$hexcolor = str_replace('#', '', $hexcolor);
