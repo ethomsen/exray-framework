@@ -9,12 +9,31 @@ class Exray extends HTML{
 
 	public function __construct(){ }
 
+	/**
+	 * Check variable isset or not and givae default value if it's not set.
+	 * @param  mixed $var     input variable.
+	 * @param  mixed $default default variable.
+	 * @return mixed Input / defaul variable.
+	 */
 	public static function validate_var($var, $default = ''){
 		if(isset($var) ){
 			return $var;
 		}
 
 		return $default;
+	}
+
+	/**
+	 * Trim and check if variable === ''
+	 * @param  mixed  $var input variable.
+	 * @return boolean true if it's  empty, flase if it's not empty.
+	 */
+	public static function isEmpty($var){
+		if(trim($var) === ''){
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
