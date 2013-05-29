@@ -2,99 +2,24 @@
 /*
     Template Name: Contact Page
 */
-global $exray_general_options; 
-$error_name = false;
-$error_email = false;
-$error_message = false;
-$error_captcha = false;
-
-// Get a key from https://www.google.com/recaptcha/admin/create
 $publickey = $exray_general_options['recaptcha_public_key'];
-$privatekey =$exray_general_options['recaptcha_private_key'];
-# the response from reCAPTCHA
-$resp = null;
-# the error code from reCAPTCHA, if any
-$error = null;
+$privatekey = $exray_general_options['recaptcha_private_key'];
 
-if(isset($_POST['contact-submit'])){
-    //Initalize variable for Form FIeld
-    $name ="";
-    $email="";
-    $website="";
-    $message="";
-    $receiver_email="";
+$contact->set_publickey($publickey);
+$contact->set_privatekey($privatekey);
 
-    // get the sender name
-    if(trim($_POST['contact-author']) === ''){
-        $error_name = true;
-    }else{
-        $name = esc_attr( trim($_POST['contact-author']) );
-    }
-
-    //Get the email
-     if(trim($_POST['contact-email']) === '' || !is_email( trim($_POST['contact-email']) )){
-        $error_email = true;
-    }else{
-        $email = esc_attr( trim($_POST['contact-email']) );
-    }
-
-    //Get the website url
-    $website = esc_attr( trim($_POST['contact-website']) );
-
-    //Get the Message
-    if(trim($_POST['contact-message']) === '' ){
-        $error_message = true;
-    }else{
-        $message =  esc_textarea( stripslashes( trim($_POST['contact-message'])) );
-    }
-
-    if(!empty($publickey) && !empty($privatekey) ){
-	    # was there a reCAPTCHA response?
-		if ( isset($_POST["recaptcha_response_field"]) ) {
-		    $resp = recaptcha_check_answer (
-		    	$privatekey,
-		        $_SERVER["REMOTE_ADDR"],
-		        $_POST["recaptcha_challenge_field"],
-		        $_POST["recaptcha_response_field"]
-		    );
-
-		    if (!$resp->is_valid) {
-		        $error_captcha = true;
-		    }
-		}
-	}
-
-    //Check if errors occures
-    if(!$error_name && !$error_email && !$error_message && !$error_captcha){
-        //Get the received email
-        $options = get_option('exray_theme_general_options');
-        $receiver_email = ( $options['contact_form_email_receiver'] == '' ? get_option( 'admin_email' ) : $options['contact_form_email_receiver'] );
-   
-        $subject = 'You have been contacted by: '. $name;
-        $body = "You have been contacted by $name. Their message is:". PHP_EOL. PHP_EOL;
-        $body .= $message . PHP_EOL. PHP_EOL;
-        $body .= "You can contact $name via email at $email ";
-        if($website != ''){
-            $body .= "and visit their website at $website ";
-        }
-        $body .= PHP_EOL . PHP_EOL;
-
-        $headers = "From: $email" . PHP_EOL;
-		$headers .= "Reply-To: $email" . PHP_EOL;
-		$headers .= "MIME-Version: 1.0" . PHP_EOL;
-		$headers .= "Content-type: text/plain; charset=utf-8" . PHP_EOL;
-		$headers .= "Content-Transfer-Encoding: quoted-printable" . PHP_EOL;
-
-        if (mail($receiver_email, $subject, $body, $headers)) {
-            $email_sent = true;
-        } else{
-            $email_sent = false;
-        }
-
-    }
-
-}
+if(isset($_POST['contact-submit']) )
+{
+	$name= $_POST['contact-author'];
+	$email= $_POST['contact-email'];
+	$website= $_POST['contact-website'];
+	$message= $_POST['contact-message'];
+	$contact->load_contact($name, $email, $website, $message);
+	$email_sent = $contact->get_email_sent();				// Email sent status
+	$email_sent_error = $contact->get_email_sent_error();	// Email sent error
+} 
 ?>
+
 <?php get_header(); ?>
 
 <!-- Main Content -->
@@ -111,35 +36,35 @@ if(isset($_POST['contact-submit'])){
 				<?php  if(have_posts()) : while(have_posts()) : the_post(); ?>				
 				<article class="post clearfix" id="post-1" role="article">
 					
-					<header>
-						
+					<header>	
 						<h1 class="entry-title"><?php the_title(); ?></h1>
 						<?php get_entry_meta('half'); ?>
 					</header>
 
-                    <?php if(isset ($email_sent) && $email_sent == true) : ?>
+                    <?php if(isset ($email_sent ) && $email_sent == true) : ?>
 
-                        <h3><?php _e('Success!', 'exray-framework') ?></h3>
-                        <p><?php _e('Email successfully sent', 'exray-framework') ?></p>
+                        <h3><?php _e('Email successfully sent', 'exray-framework') ?></h3>
+                        <p><?php _e('Thank you for emailing us, we will respond your email immedeatly.', 'exray-framework') ?></p>
                         <a href="<?php the_permalink(); ?>"><?php echo _e('&larr; Back to contact form', 'exray-framework'); ?></a>
 
-                    <?php elseif(isset ($email_sent_error) && $email_sent_error == true) : ?>
+                    <?php elseif(isset ($email_sent_error ) && $email_sent_error == true) : ?>
 
-                        <h3><?php _e('Error!', 'exray-framework') ?></h3>
-                        <p><?php _e('Unable sending email', 'exray-framework') ?></p>
+                        <h3><?php _e('Oops, Error!', 'exray-framework') ?></h3>
+                        <p><?php _e('Look like we failed to send your email, please try again.', 'exray-framework') ?></p>
+                        <a href="<?php the_permalink(); ?>"><?php echo _e('&larr; Back to contact form', 'exray-framework'); ?></a>
 
                     <?php else: ?>
 
-                        	<div class="entry-content">
+                	<div class="entry-content">
 
 						<?php the_content(); ?>
 
 						<form action="<?php echo the_permalink(); ?>" method="post" id="contact-form">
-							<p <?php if($error_name) echo 'class="p-errors"'; ?> >
+							<p <?php if($contact->get_error_name() ) echo 'class="p-errors"'; ?> >
                                 <label for="contact-author"><?php _e('Name *', 'exray-framework'); ?></label>
                                 <input type="text" value="<?php if(isset ($_POST['contact-author'])) echo $_POST['contact-author'];  ?>" name="contact-author" id="contact-author"/>
 							</p>
-							<p <?php if($error_email) echo 'class="p-errors"'; ?>>
+							<p <?php if($contact->get_error_email() ) echo 'class="p-errors"'; ?>>
 								<label for="contact-email"><?php _e('Email *', 'exray-framework'); ?></label>
 								<input type="text" value="<?php if(isset ($_POST['contact-email'])) echo $_POST['contact-email'];  ?>" name="contact-email" id="contact-email"/>
 							</p>
@@ -147,19 +72,20 @@ if(isset($_POST['contact-submit'])){
 								<label for="contact-website"><?php _e('Website', 'exray-framework'); ?></label>
 								<input type="text" value="<?php if(isset ($_POST['contact-website'])) echo $_POST['contact-website'];  ?>" name="contact-website" id="contact-website"/>
 							</p>
-							<p <?php if($error_message) echo 'class="p-errors"'; ?>>
+							<p <?php if($contact->get_error_message() ) echo 'class="p-errors"'; ?>>
 								<label for="contact-message"><?php _e('Message', 'exray-framework'); ?></label>
                                 <textarea name="contact-message" id="contact-message" cols="30" rows="10"><?php if(isset ($_POST['contact-message'])) echo stripslashes( $_POST['contact-message']);  ?> </textarea>
 							</p>
-							<p <?php if( $error_captcha ) echo 'class="p-errors"'; ?> >
-								<?php if(!empty($publickey) && !empty($privatekey) ) : ?>
+							<p <?php if( $contact->get_error_captcha() ) echo 'class="p-errors"'; ?> >
+								<?php if(!Exray::isEmpty($contact->get_publickey() ) && !Exray::isEmpty($contact->get_privatekey() ) ) : ?>
 									<label for="contact-captcha"><?php _e('Are you human? Please solve captcha below to prove it.', 'exray-framework'); ?></label>
-									<?php echo recaptcha_get_html($publickey, $error); ?>
+									<!-- reCaptcha Widget -->
+									<?php echo recaptcha_get_html($contact->get_publickey(), $contact->get_privatekey() ); ?>
 								<?php endif; ?>
 							</p>
 
 							<input type="hidden" name="contact-submit" id="contact-submit" value="true"/>
-							<p><input type="submit" value="Send Message"/></p>
+							<p><input type="submit" value="<?php _e('Send Message', 'exray-framework'); ?>"/></p>
 						</form>
 
 					</div>
