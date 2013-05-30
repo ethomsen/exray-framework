@@ -5,14 +5,15 @@ add_action( 'customize_register', 'exray_customize_register');
 function exray_customize_register($wp_customize){
 
 	/* Create Theme Customizer sections */
-		
+	
+	//Logo section
 	$wp_customize->add_section('exray_logo', array(
 		'title' 		=> __('Logo', 'exray-framework'),
 		'description' 	=> __('Upload your Website logo below', 'exray-framework'),
 		'priority'		=> '35'
 	));
 	
-		//Top Ad Section on Theme Customizer
+	//Top Ad Section on Theme Customizer
 	$wp_customize->add_section('exray_ad', array(
 		'title' 		=> __('Top Ad', 'exray-framework'),
 		'description' 	=> __('Allow you to upload ad Banner on the top of the page', 'exray-framework'),
@@ -23,7 +24,6 @@ function exray_customize_register($wp_customize){
 	/* Theme Customizer setting & control */	
 	
 	/* Display logo */
-	
 	$wp_customize->add_setting('exray_custom_settings[display_logo]', array(
 			'default'=>'0',
 			'type'=>'option' 
@@ -50,8 +50,7 @@ function exray_customize_register($wp_customize){
 	)));
 
 	
-	/*Add setting for checkbox enable displaying Top Ad (setting saved to db).*/
-	
+	/*Add setting for checkbox enable displaying Top Ad (setting saved to db).*/	
 	$wp_customize->add_setting('exray_custom_settings[display_top_ad]', array(
 				'default' => '0',
 				'type' => 'option'
