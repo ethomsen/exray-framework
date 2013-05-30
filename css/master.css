@@ -1075,14 +1075,7 @@ input[type="password"]:focus {
 }
 /* Smaller than standard 1200 (devices and browsers) */
 @media only screen and (max-width: 1199px) {
-  /*.main-sidebar{
-  		width: 270px;
-  		margin-left: 30px;
-  	}
   
-  	.article-container-adaptive{
-  		width: 640px;
-  	}*/
 }
 /* Smaller than standard 960 (devices and browsers) */
 @media only screen and (max-width: 959px) {
@@ -1184,6 +1177,9 @@ input[type="password"]:focus {
     margin-bottom: 0;
     text-align: center;
   }
+  .text-logo {
+    text-align: center;
+  }
   #header-wrap .right-header-widget {
     margin-top: 1em;
     padding: 1em;
@@ -1252,6 +1248,9 @@ input[type="password"]:focus {
   }
   #header-wrap .logo-container h1 {
     margin-bottom: 0;
+    text-align: center;
+  }
+  .text-logo {
     text-align: center;
   }
   #header-wrap .right-header-widget {
