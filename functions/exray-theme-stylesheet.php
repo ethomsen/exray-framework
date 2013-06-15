@@ -172,3 +172,4 @@ function colourCreator($colour, $per){
 	} 
 	return '#'.$rgb; 
 } 
+?>
