@@ -26,7 +26,7 @@ class Exray extends HTML{
 	/**
 	 * Trim and check if variable === ''
 	 * @param  mixed  $var input variable.
-	 * @return boolean true if it's  empty, flase if it's not empty.
+	 * @return boolean true if it's  empty, false if it's not empty.
 	 */
 	public static function isEmpty($var){
 		if(trim($var) === ''){
